@@ -7,7 +7,7 @@ require_once "Mail.php";
 
 $host = "ssl://smtp.zoho.eu";
 $username = "band@kaifeck.de";
-$password = file_get_contents("pwd");
+$password = file_get_contents("/var/www/pwd");
 $port = "465";
 $email_sender = $_POST['email'];
 $email_noreply = "noreply@kaifeck.de";
