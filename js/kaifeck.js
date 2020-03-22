@@ -57,6 +57,13 @@
 
   // Functionality of the "send" button for emails
   $('#btn-send-mail').click(function () {
+    // make all messages invisible
+    $("#successMsgSent").addClass("d-none");
+    $("#errorMsgEmail").addClass("d-none");
+    $("#errorMsgFail").addClass("d-none");
+    $("#errorMsgText").addClass("d-none");
+    $("#errorMsgPear").addClass("d-none");
+
     // check if the text is empty
     var is_message_empty = true;
     var message = $.trim($("#messageInput").val());
@@ -64,25 +71,41 @@
       $("#errorMsgText").removeClass("d-none");
     }
     else {
-      $("#errorMsgText").addClass("d-none");
       is_message_empty = false;
     }
 
+    // check validity of email
     var email_address = $.trim($("#emailInput").val());
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     var is_email_valid = regex.test(email_address);
     if (!is_email_valid) {
       $("#errorMsgEmail").removeClass("d-none");
     }
-    else {
-      $("#errorMsgEmail").addClass("d-none");
-    }
 
+    // send email via post
     if (!is_message_empty && is_email_valid) {
-      $('#emailForm').submit();
-      $("#successMsgSent").removeClass("d-none");
-      $("#messageInput").val('');
-      $("#emailInput").val('');
+      var email = $("#emailInput").val();
+      var text = $("#messageInput").val();
+      $("#waitMsg").removeClass("d-none");
+      $.post(
+          "php/send_mail.php",
+          { email: email, text: text },
+          function (data, status) {
+            $("#waitMsg").addClass("d-none");
+            if (data.localeCompare("success") == 0) {
+              $("#successMsgSent").removeClass("d-none");
+              $("#messageInput").val('');
+              $("#emailInput").val('');
+            }
+            else if (data.localeCompare("fail") == 0) {
+              $("#errorMsgFail").removeClass("d-none");
+            }
+            else {
+              $("#errorMsgPear").removeClass("d-none");
+              $("#errorMsgPear").html(data);
+            }
+          }
+      )
     }
     else {
       $("#successMsgSent").addClass("d-none");

@@ -252,7 +252,7 @@
         <h2 class="text-white-50 text-center mb-3">Contact us</h2>
 
         <!-- Email Form-->
-        <form id="emailForm" method="post" name="emailFrom" action="php/send_mail.php" target="_blank">
+        <form id="emailForm" name="emailFrom" target="_blank">
           <div class="form-group">
             <label for="emailInput">Your email address:</label>
             <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" name="email">
@@ -263,8 +263,11 @@
           </div>
           <!--input type="submit" value="Send"-->
         </form>
+        <p id="waitMsg" class="waitMsg text-center d-none">Sending Email. Please wait...</p>
         <p id="errorMsgEmail" class="errorMsg text-center d-none">Please enter a valid email address.</p>
         <p id="errorMsgText" class="errorMsg text-center d-none">Please enter some text.</p>
+        <p id="errorMsgFail" class="errorMsg text-center d-none">Oops, something went wrong!</p>
+        <p id="errorMsgPear" class="errorMsg text-center d-none"></p>
         <p id="successMsgSent" class="successMsg text-center d-none">
           Email was sent! You should receive a confirmation mail soon.
         </p>

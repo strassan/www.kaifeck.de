@@ -21,12 +21,16 @@ $email_reply = "contact@kaifeck.de";
 $sender_headers = array ('From' => $email_noreply, 'To' => $email_sender, 'Subject' => $sender_subject, 'Reply-To' => $email_reply);
 $kaifeck_headers = array ('From' => $email_noreply, 'To' => $username, 'Subject' => $kaifeck_subject, 'Reply-To' => $email_sender);
 $smtp = Mail::factory('smtp', array ('host' => $host, 'port' => $port, 'auth' => true, 'username' => $username, 'password' => $password));
-$sender_mail = $smtp->send($email_sender, $sender_headers, $sender_body);
-$kaifeck_mail = $smtp->send($username, $kaifeck_headers, $kaifeck_body);
 
-if (PEAR::isError($kaifeck_mail)) {
-    echo("<p>" . $kaifeck_mail->getMessage() . "</p>");
-} else {
-    echo("<p>Message successfully sent!</p>");
-    echo "<script>window.close();</script>";
+if (!empty($email_sender) && !empty($sender_text)) {
+    $sender_mail = $smtp->send($email_sender, $sender_headers, $sender_body);
+    $kaifeck_mail = $smtp->send($username, $kaifeck_headers, $kaifeck_body);
+    if (PEAR::isError($kaifeck_mail)) {
+        echo($kaifeck_mail->getMessage());
+    } else {
+        echo("success");
+    }
+}
+else {
+    echo("fail");
 }
