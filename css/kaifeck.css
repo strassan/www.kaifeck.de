@@ -282,6 +282,19 @@
   color: #0c0;
 }
 
+.leftCol {
+    border-right: 1px solid white !important;
+    text-align: right;
+    padding-right: 20px !important;
+    width: 50%;
+}
+
+.rightCol {
+    text-align: left;
+    padding-left: 20px !important;
+    width: 50%;
+}
+
 body {
   font-family: 'Nunito';
   letter-spacing: 0.0625em;
