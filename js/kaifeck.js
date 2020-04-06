@@ -87,25 +87,27 @@
       var email = $("#emailInput").val();
       var text = $("#messageInput").val();
       $("#waitMsg").removeClass("d-none");
-      $.post(
-          "php/send_mail.php",
-          { email: email, text: text },
-          function (data, status) {
-            $("#waitMsg").addClass("d-none");
-            if (data.localeCompare("success") == 0) {
-              $("#successMsgSent").removeClass("d-none");
-              $("#messageInput").val('');
-              $("#emailInput").val('');
-            }
-            else if (data.localeCompare("fail") == 0) {
-              $("#errorMsgFail").removeClass("d-none");
-            }
-            else {
-              $("#errorMsgPear").removeClass("d-none");
-              $("#errorMsgPear").html(data);
-            }
+      $.ajax({
+        type: "POST",
+        url: "php/send_mail.php",
+        data: {
+          email: email,
+          text: text
+        },
+        success: function (data, status) {
+          $("#waitMsg").addClass("d-none");
+          if (data.localeCompare("success") == 0) {
+            $("#successMsgSent").removeClass("d-none");
+            $("#messageInput").val('');
+            $("#emailInput").val('');
+          } else if (data.localeCompare("fail") == 0) {
+            $("#errorMsgFail").removeClass("d-none");
+          } else {
+            $("#errorMsgPear").removeClass("d-none");
+            $("#errorMsgPear").html(data);
           }
-      )
+        }
+      });
     }
     else {
       $("#successMsgSent").addClass("d-none");
