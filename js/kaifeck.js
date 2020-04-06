@@ -39,6 +39,18 @@
   // Collapse the navbar when page is scrolled
   $(window).scroll(navbarCollapse);
 
+  // Load in YouTube videos from php/data/youtube_uploads.json
+  $.ajax({
+    url: "php/data/youtube_uploads.json",
+    success: function (data) {
+      for (let i = 0; i <= 5; i++) {
+        $('#songFrame' + (i+1).toString()).html('<iframe class="embed-responsive-item mb-3 mb-lg-0" src="https://www.youtube.com/embed/' + data[i].href + '" allowfullscreen></iframe>');
+        $('#songTitle' + (i+1).toString()).html(data[i].title);
+      }
+    }
+  });
+
+
   // Change "Show more" button text on collapse
   $('#collapse-songs').on('shown.bs.collapse', function () {
     $('#btn-show-songs').html('Show less')
