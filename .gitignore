@@ -1,2 +1,4 @@
 .idea/
-php/data
+php/data/*
+
+!php/data/.htaccess
