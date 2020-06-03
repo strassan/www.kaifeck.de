@@ -1,8 +1,5 @@
 .idea/
 .venv/
 
-php/data/*
-!php/data/.htaccess
-
 *.pyc
 *.sqlite3
