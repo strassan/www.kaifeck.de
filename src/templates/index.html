@@ -247,32 +247,42 @@
         <h2 class="text-white-50 text-center mb-3">Contact us</h2>
 
         <!-- Email Form-->
-        <form id="emailForm" name="emailFrom" target="_blank">
-          <div class="form-group">
-            <label for="emailInput">Your email address:</label>
-            <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" name="email">
-          </div>
-          <div class="form-group">
-            <label for="messageInput">Your message:</label>
-            <textarea class="form-control" id="messageInput" rows="5" name="text"></textarea>
-          </div>
-          <!--input type="submit" value="Send"-->
-        </form>
-        <p id="waitMsg" class="waitMsg text-center d-none">Sending Email. Please wait...</p>
-        <p id="errorMsgEmail" class="errorMsg text-center d-none">Please enter a valid email address.</p>
-        <p id="errorMsgText" class="errorMsg text-center d-none">Please enter some text.</p>
-        <p id="errorMsgFail" class="errorMsg text-center d-none">Oops, something went wrong!</p>
-        <p id="errorMsgPear" class="errorMsg text-center d-none"></p>
-        <p id="successMsgSent" class="successMsg text-center d-none">
-          Email was sent! You should receive a confirmation mail soon.
-        </p>
         <div class="row align-content-center no-gutters">
-          <div class="mx-auto mb-5">
-            <a class="btn btn-primary" id="btn-send-mail" role="button">
-              Send
-            </a>
-          </div>
+          <form id="emailForm" class="user" action="{% url 'index' %}#contact" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="emailInput">Your email address:</label>
+              <input type="email" class="form-control" id="emailInput" placeholder="name@example.com"
+                     name="{{ form.sender_email.name }}" required>
+            </div>
+            <div class="form-group">
+              <label for="messageInput">Your message:</label>
+              <textarea class="form-control" id="messageInput" rows="5" name="{{ form.sender_message.name }}"
+                        required></textarea>
+            </div>
+            {% if error %}
+              <p class="errorMsg text-center">{{ error }}</p>
+            {% endif %}
+            <div class="text-center mx-auto mb-5">
+              <input type="submit" id="btn-send-mail" class="btn btn-primary" value="Send">
+            </div>
+          </form>
         </div>
+<!--        <p id="waitMsg" class="waitMsg text-center d-none">Sending Email. Please wait...</p>-->
+<!--        <p id="errorMsgEmail" class="errorMsg text-center d-none">Please enter a valid email address.</p>-->
+<!--        <p id="errorMsgText" class="errorMsg text-center d-none">Please enter some text.</p>-->
+<!--        <p id="errorMsgFail" class="errorMsg text-center d-none">Oops, something went wrong!</p>-->
+<!--        <p id="errorMsgPear" class="errorMsg text-center d-none"></p>-->
+<!--        <p id="successMsgSent" class="successMsg text-center d-none">-->
+<!--          Email was sent! You should receive a confirmation mail soon.-->
+<!--        </p>-->
+<!--        <div class="row align-content-center no-gutters">-->
+<!--          <div class="mx-auto mb-5">-->
+<!--            <a class="btn btn-primary" id="btn-send-mail" role="button">-->
+<!--              Send-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
 
       <!-- Contact Details -->

@@ -13,9 +13,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    @property
     def is_closed(self):
         return timezone.now().date() > self.close_date
 
+    @property
     def is_open(self):
         return not self.is_closed()
 
