@@ -253,15 +253,15 @@
             <div class="form-group">
               <label for="emailInput">Your email address:</label>
               <input type="email" class="form-control" id="emailInput" placeholder="name@example.com"
-                     name="{{ form.sender_email.name }}" required>
+                     name="sender_email" required>
             </div>
             <div class="form-group">
               <label for="messageInput">Your message:</label>
-              <textarea class="form-control" id="messageInput" rows="5" name="{{ form.sender_message.name }}"
+              <textarea class="form-control" id="messageInput" rows="5" name="sender_message"
                         required></textarea>
             </div>
-            {% if error %}
-              <p class="errorMsg text-center">{{ error }}</p>
+            {% if smtp_error %}
+              <p class="errorMsg text-center">Error: {{ smtp_error }}</p>
             {% endif %}
             <div class="text-center mx-auto mb-5">
               <input type="submit" id="btn-send-mail" class="btn btn-primary" value="Send">
