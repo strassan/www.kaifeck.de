@@ -19,8 +19,8 @@ def index(request):
             'sender_email': request.POST.get('sender_email'),
             'sender_message': request.POST.get('sender_message')
         }
-        sender_html = render_to_string('mails/sender_mail.j2', context=mail_context)
-        kaifeck_html = render_to_string('mails/kaifeck_mail.j2', context=mail_context)
+        sender_html = render_to_string('website/mails/sender_mail.j2', context=mail_context)
+        kaifeck_html = render_to_string('website/mails/kaifeck_mail.j2', context=mail_context)
         try:
             send_mail(
                 subject='Your message to Kaifeck',
@@ -41,4 +41,4 @@ def index(request):
         except SMTPException as err:
             context['smtp_error'] = err
 
-    return render(request, "index.html", context)
+    return render(request, "website/index.html", context)
