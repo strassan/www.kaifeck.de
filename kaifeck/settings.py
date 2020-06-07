@@ -122,3 +122,6 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = '****'
 EMAIL_HOST_PASSWORD = '****'
 EMAIL_SENDER = 'noreply@kaifeck.de'
+
+# Youtube API
+YOUTUBE_API_KEY = '****'
