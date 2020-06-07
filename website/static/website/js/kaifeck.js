@@ -3,8 +3,9 @@
 
   // Smooth scrolling using jQuery easing
   $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      var target = $(this.hash);
+    if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '')
+        && location.hostname === this.hostname) {
+      let target = $(this.hash);
       target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
       if (target.length) {
         $('html, body').animate({
@@ -27,11 +28,12 @@
   });
 
   // Collapse Navbar
-  var navbarCollapse = function() {
-    if ($("#mainNav").offset().top > 100) {
-      $("#mainNav").addClass("navbar-shrink");
+  let navbarCollapse = function() {
+    let mainNav = $("#mainNav");
+    if (mainNav.offset().top > 100) {
+      mainNav.addClass("navbar-shrink");
     } else {
-      $("#mainNav").removeClass("navbar-shrink");
+      mainNav.removeClass("navbar-shrink");
     }
   };
   // Collapse now if page is not at top
@@ -39,16 +41,17 @@
   // Collapse the navbar when page is scrolled
   $(window).scroll(navbarCollapse);
 
+  let collapseSongs = $('#collapse-songs')
   // Change "Show more" button text on collapse
-  $('#collapse-songs').on('shown.bs.collapse', function () {
+  collapseSongs.on('shown.bs.collapse', function () {
     $('#btn-show-songs').html('Show less')
   });
   // Change "Show less" button text on hide
-  $('#collapse-songs').on('hidden.bs.collapse', function () {
+  collapseSongs.on('hidden.bs.collapse', function () {
     $('#btn-show-songs').html('Show More')
   });
   // Scroll up when collapsing
-  $('#collapse-songs').on('hide.bs.collapse', function () {
+  collapseSongs.on('hide.bs.collapse', function () {
     $([document.documentElement, document.body]).animate({
       scrollTop: $("#collapse-songs").offset().top - 500
     }, 500);
@@ -58,59 +61,66 @@
   // Functionality of the "send" button for emails
   $('#btn-send-mail').click(function () {
     // make all messages invisible
-    $("#successMsgSent").addClass("d-none");
-    $("#errorMsgEmail").addClass("d-none");
-    $("#errorMsgFail").addClass("d-none");
-    $("#errorMsgText").addClass("d-none");
-    $("#errorMsgPear").addClass("d-none");
+    let waitMsg = $("#waitMsg");
+    let successMsg = $("#successMsg");
+    let errorMsg = $("#errorMsg");
+    waitMsg.addClass("d-none");
+    successMsg.addClass("d-none");
+    errorMsg.addClass("d-none");
+    errorMsg.html("");
 
     // check if the text is empty
-    var is_message_empty = true;
-    var message = $.trim($("#messageInput").val());
-    if (message == "") {
-      $("#errorMsgText").removeClass("d-none");
+    let is_message_empty = true;
+    const message = $.trim($("#messageInput").val());
+    if (message === "") {
+      errorMsg.removeClass("d-none");
+      errorMsg.append("Please enter some text. ");
     }
     else {
       is_message_empty = false;
     }
 
     // check validity of email
-    var email_address = $.trim($("#emailInput").val());
-    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var is_email_valid = regex.test(email_address);
+    const email_address = $.trim($("#emailInput").val());
+    const regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    let is_email_valid = regex.test(email_address);
     if (!is_email_valid) {
-      $("#errorMsgEmail").removeClass("d-none");
+      errorMsg.removeClass("d-none");
+      errorMsg.append("Please enter a valid email address. ");
     }
+
+    // get csrf_token
+    const csrf_token = $.trim($("input[name=csrfmiddlewaretoken]").val())
 
     // send email via post
     if (!is_message_empty && is_email_valid) {
-      var email = $("#emailInput").val();
-      var text = $("#messageInput").val();
-      $("#waitMsg").removeClass("d-none");
+      waitMsg.removeClass("d-none");
       $.ajax({
         type: "POST",
-        url: "php/send_mail.php",
+        url: "send_mail",
         data: {
-          email: email,
-          text: text
+          sender_email: email_address,
+          sender_message: message,
+          csrfmiddlewaretoken: csrf_token
         },
         success: function (data, status) {
-          $("#waitMsg").addClass("d-none");
-          if (data.localeCompare("success") == 0) {
-            $("#successMsgSent").removeClass("d-none");
+          waitMsg.addClass("d-none");
+          if (data.localeCompare("success") === 0) {
+            successMsg.removeClass("d-none");
             $("#messageInput").val('');
             $("#emailInput").val('');
-          } else if (data.localeCompare("fail") == 0) {
-            $("#errorMsgFail").removeClass("d-none");
+          } else if (data.localeCompare("fail") === 0) {
+            errorMsg.removeClass("d-none");
+            errorMsg.append("Oops, something went wrong! ")
           } else {
-            $("#errorMsgPear").removeClass("d-none");
-            $("#errorMsgPear").html(data);
+            errorMsg.removeClass("d-none");
+            errorMsg.append("Error " + data);
           }
         }
       });
     }
     else {
-      $("#successMsgSent").addClass("d-none");
+      successMsg.addClass("d-none");
     }
   });
 

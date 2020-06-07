@@ -14,6 +14,10 @@ def index(request):
     context = {
         'videos': videos,
     }
+    return render(request, "website/index.html", context)
+
+
+def mail(request):
     if request.POST:
         mail_context = {
             'sender_email': request.POST.get('sender_email'),
@@ -38,7 +42,14 @@ def index(request):
                 html_message=kaifeck_html.replace('\n', '<br/>'),
                 fail_silently=False
             )
+            context = {'success': True, 'smtp_error': str()}
         except SMTPException as err:
-            context['smtp_error'] = err
-
-    return render(request, "website/index.html", context)
+            context = {
+                'success': False, 'smtp_error': '{errno:d}: {str}'.format(
+                    errno=getattr(err, 'smtp_code', -1),
+                    str=getattr(err, 'smtp_error', 'ignore').decode("utf-8")
+                )
+            }
+    else:
+        context = {'success': False, 'smtp_error': 'fail'}
+    return render(request, 'website/send_mail.html', context)
