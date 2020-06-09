@@ -9,7 +9,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError as GoogleHttpError
 import json
 
-from .models import YouTubeVideo
+from .models import YouTubeVideo, Gig, News
 
 
 def make_visible_on_website(modeladmin, request, queryset):
@@ -85,3 +85,8 @@ class YouTubeAdmin(admin.ModelAdmin):
         else:
             self.message_user(request, 'Videos have been updated.')
         return HttpResponseRedirect('../')
+
+
+@admin.register(Gig, News)
+class PostAdmin(admin.ModelAdmin):
+    readonly_fields = ('created_at', 'modified_at',)

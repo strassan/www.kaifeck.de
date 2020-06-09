@@ -6,13 +6,17 @@ from django.utils.html import strip_tags
 
 from smtplib import SMTPException
 
-from .models import Post, YouTubeVideo
+from .models import YouTubeVideo, News, Gig
 
 
 def index(request):
     videos = YouTubeVideo.objects.filter(show_on_website=True).order_by('-upload_datetime')
+    gigs = [gig for gig in Gig.objects.all() if gig.is_open]
+    news = [n for n in News.objects.all() if n.is_open]
     context = {
         'videos': videos,
+        'news': news,
+        'gigs': gigs
     }
     return render(request, "website/index.html", context)
 

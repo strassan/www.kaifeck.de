@@ -6,6 +6,14 @@ class Post(models.Model):
     title = models.CharField(max_length=128)
     content = models.TextField()
     close_date = models.DateField()  # the close_date will be the last day on which the post is visible on the website
+    created_at = models.DateTimeField(editable=False)
+    modified_at = models.DateTimeField(editable=False)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -16,7 +24,25 @@ class Post(models.Model):
 
     @property
     def is_open(self):
-        return not self.is_closed()
+        return not self.is_closed
+
+
+class Gig(Post):
+    gig_start_date = models.DateField()
+    gig_start_time = models.TimeField(blank=True, null=True)
+    gig_end_date = models.DateField(blank=True, null=True)
+    gig_end_time = models.TimeField(blank=True, null=True)
+    location = models.CharField(max_length=64)
+    google_maps_link = models.CharField(max_length=256, blank=True)
+    ticket_link = models.CharField(max_length=256, blank=True)
+
+
+class News(Post):
+    short_description = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name = 'News'
+        verbose_name_plural = 'News'
 
 
 class YouTubeVideo(models.Model):
