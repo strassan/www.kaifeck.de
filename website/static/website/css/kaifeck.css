@@ -4,6 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-grayscale/blob/master/LICENSE)
  */
 
+:root {
+  --main-color: #7a0000;
+  --main-color-dark: #590000;
+}
+
 #mainNav {
   min-height: 56px;
   background-color: rgba(200, 200, 200, 0.97);
@@ -13,8 +18,8 @@
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.75rem;
-  color: #7a0000;
-  border: 1px solid #7a0000;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
 }
 
 #mainNav .navbar-toggler:focus {
@@ -74,15 +79,15 @@
     border-bottom: 0.25rem solid transparent;
   }
   #mainNav.navbar-shrink .nav-link:hover {
-    color: #7a0000;
+    color: var(--main-color);
   }
   #mainNav.navbar-shrink .nav-link:active {
-    color: #590000;
+    color: var(--main-color-dark);
   }
   #mainNav.navbar-shrink .nav-link.active {
-    color: #7a0000;
+    color: var(--main-color);
     outline: none;
-    border-bottom: 0.25rem solid #7a0000;
+    border-bottom: 0.25rem solid var(--main-color);
   }
 }
 
@@ -151,20 +156,20 @@
 }
 
 .btn-primary {
-  background-color: #7a0000;
+  background-color: var(--main-color);
 }
 
 .btn-primary:hover {
-  background-color: #590000;
+  background-color: var(--main-color-dark);
 }
 
 .btn-primary:focus {
-  background-color: #7a0000;
+  background-color: var(--main-color);
   color: white;
 }
 
 .btn-primary:active {
-  background-color: #7a0000 !important;
+  background-color: var(--main-color) !important;
 }
 
 .about-section {
@@ -199,7 +204,7 @@
 @media (min-width: 992px) {
   .projects-section .featured-text {
     padding: 0 0 0 2rem;
-    border-left: 0.5rem solid #7a0000;
+    border-left: 0.5rem solid var(--main-color);
   }
 }
 
@@ -213,7 +218,7 @@
     padding: 5rem;
   }
   .projects-section .project-text hr {
-    border-color: #7a0000;
+    border-color: var(--main-color);
     border-width: .25rem;
     width: 30%;
   }
@@ -225,7 +230,7 @@
 
 .contact-section .card {
   border: 0;
-  border-bottom: 0.25rem solid #7a0000;
+  border-bottom: 0.25rem solid var(--main-color);
 }
 
 .contact-section .card h4 {
@@ -236,7 +241,7 @@
 }
 
 .contact-section .card hr {
-  border-color: #7a0000;
+  border-color: var(--main-color);
   border-width: 0.25rem;
   width: 3rem;
 }
@@ -301,12 +306,12 @@ body {
 }
 
 a {
-  color: #7a0000;
+  color: var(--main-color);
 }
 
 a:focus, a:hover {
   text-decoration: none;
-  color: #590000;
+  color: var(--main-color-dark);
 }
 
 .bg-black {
@@ -314,11 +319,11 @@ a:focus, a:hover {
 }
 
 .bg-primary {
-  background-color: #7a0000 !important;
+  background-color: var(--main-color) !important;
 }
 
 .text-primary {
-  color: #7a0000 !important;
+  color: var(--main-color) !important;
 }
 
 footer {
