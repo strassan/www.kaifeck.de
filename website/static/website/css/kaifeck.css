@@ -270,12 +270,20 @@
   }
 }
 
-.news-section .small-link {
+.news-section .gray-link {
   color: #a5a5a5;
 }
 
-.news-section .small-link:hover {
+.news-section .gray-link:hover {
   color: #727272;
+}
+
+.news-section .white-link {
+  color: #ffffff;
+}
+
+.news-section .white-link:hover {
+  color: #a5a5a5;
 }
 
 .detail-section {
