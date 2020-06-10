@@ -60,6 +60,9 @@
               </div>
             </div>
           {% endfor %}
+          {% if not gigs %}
+            <p class="text-white-50 text-center">No shows planned.</p>
+          {% endif %}
         </div>
       </div>
     </div>

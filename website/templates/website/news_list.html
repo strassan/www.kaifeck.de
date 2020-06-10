@@ -47,6 +47,9 @@
               </div>
             </div>
           {% endfor %}
+          {% if not news %}
+            <p class="text-white-50 text-center">No news posted yet.</p>
+          {% endif %}
         </div>
       </div>
     </div>
