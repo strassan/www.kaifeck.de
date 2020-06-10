@@ -1,78 +1,14 @@
+{% extends 'website/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Official website of the band Kaifeck">
-  <meta name="keywords" content=
-          "Kaifeck, Band, Official, Offiziell, Rebirth, Music, Musik, Metal, Modern Metal, Metalcore, Progressive,
-          Pfaffenhofen, München, Munich">
-  <meta name="author" content="Andreas Strasser">
-
-  <title>Kaifeck</title>
-  <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}" sizes="any">
-
-  <!-- Bootstrap core CSS -->
-  <link href="{% static '/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="{% static 'fontawesome-free/css/all.min.css' %}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="{% static 'website/css/kaifeck.css' %}" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        Kaifeck
-      </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#listen">Listen</a>
-          </li>
-          {% if news %}
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#news">News</a>
-          </li>
-          {% elif gigs %}
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#gigs">News</a>
-          </li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
+{% block content %}
   <!-- Header -->
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
         <img class="img-fluid mb-3" src="{% static 'website/img/logo/logo_white.svg' %}" width="50%" alt="logo">
         <!--h1 class="mx-auto my-0 text-uppercase">Kaifeck</h1-->
-        <h2 class="text-white-50 mx-auto mt-2 mb-5">Welcome to the official website of the band Kaifeck</h2>
+        <h2 class="text-white-50 mx-auto mt-2 mb-5">Welcome to the official website of the band Kaifeck.</h2>
         <a href="#listen" class="btn btn-primary js-scroll-trigger">Listen</a>
       </div>
     </div>
@@ -171,7 +107,11 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 mx-auto">
-          <h1 class="mb-5 text-center text-white">News</h1>
+          <h1 class="mb-5 text-center text-white">
+            <a href="{% url 'website:news_list' %}" class="text-white">
+              News
+            </a>
+          </h1>
           {% for n in news %}
             <div class="row no-gutters mb-4 bg-dgray">
               <div class="col-lg-6">
@@ -179,30 +119,45 @@
                   <div class="d-flex h-100">
                     <div class="project-text w-100 text-center text-lg-left my-auto">
                       <h4 class="text-white">
-                        <a class="text-white" href="">
+                        <a class="text-white" href="{% url 'website:news_detail' n.pk %}">
                           {{ n.title }}
                         </a>
                       </h4>
+                      {% if n.short_description %}
                       <p class="mb-0 text-white-50">
                         {{ n.short_description }}
                       </p>
-                      <hr class="d-none d-lg-block mb-0 ml-0">
+                      {% endif %}
+                      <hr class="d-none d-lg-block mb-3 ml-0">
+                      <p class="mb-0 text-light small">
+                        posted {{ n.created_at|date:"F d, Y" }}
+                      </p>
+                      {% if n.modified_at != n.created_at %}
+                      <p class="mb-0 text-white-50 small">
+                        modified {{ n.modified_at|date:"F d, Y" }}
+                      </p>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="my-auto pt-4 pb-2 col-lg-6{% if forloop.counter|divisibleby:2 %} order-lg-first{% endif %}">
+              <div class="my-auto py-0 py-lg-4 px-5 px-lg-0 col-lg-6{% if forloop.counter|divisibleby:2 %} order-lg-first{% endif %}">
                 <div class="featured-text{% if forloop.counter|divisibleby:2 %}-r{% else %}-l{% endif %} text-white">
-                  {% if n.content|length <= 500 %}
-                    {{ n.content|linebreaks }}
-                  {% else %}
-                    {{ n.content|linebreaks|slice:":500" }}...<br/>
-                  <a href="">[Read more]</a>
-                  {% endif %}
+                  <p class="my-0 py-4 py-lg-0">
+                    {% if n.content|length <= 500 %}
+                      {{ n.content|linebreaksbr }}
+                    {% else %}
+                      {{ n.content|linebreaksbr|slice:":500" }}...<br/>
+                    <a href="{% url 'website:news_detail' n.pk %}">[Read more]</a>
+                    {% endif %}
+                  </p>
                 </div>
               </div>
             </div>
           {% endfor %}
+          <div class="text-center">
+            <a href="{% url 'website:news_list' %}" class="small-link">(Show all posts)</a>
+          </div>
         </div>
       </div>
     </div>
@@ -211,11 +166,15 @@
 
   {% if gigs %}
   <!-- Upcoming shows Section -->
-  <section id="gigs" class="news-section">
+  <section id="shows" class="news-section">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 mx-auto">
-          <h1 class="mb-5 text-center text-white">Upcoming shows</h1>
+          <h1 class="mb-5 text-center text-white">
+            <a href="{% url 'website:shows_list' %}" class="text-white">
+              Upcoming shows
+            </a>
+          </h1>
           {% for gig in gigs %}
             <div class="row no-gutters mb-4 bg-dgray">
               <div class="col-lg-6">
@@ -223,7 +182,7 @@
                   <div class="d-flex h-100">
                     <div class="project-text w-100 text-center text-lg-left my-auto">
                       <h4 class="text-white">
-                        <a class="text-white" href="">
+                        <a class="text-white" href="{% url 'website:shows_detail' gig.pk %}">
                           {{ gig.title }}
                         </a>
                       </h4>
@@ -252,18 +211,23 @@
                   </div>
                 </div>
               </div>
-              <div class="my-auto pt-4 pb-2 col-lg-6{% if forloop.counter|divisibleby:2 %} order-lg-first{% endif %}">
+              <div class="my-auto py-0 py-lg-4 px-5 px-lg-0 col-lg-6{% if forloop.counter|divisibleby:2 %} order-lg-first{% endif %}">
                 <div class="featured-text{% if forloop.counter|divisibleby:2 %}-r{% else %}-l{% endif %} text-white">
-                  {% if gig.content|length <= 500 %}
-                    {{ gig.content|linebreaks }}
-                  {% else %}
-                    {{ gig.content|linebreaks|slice:":500" }}...<br/>
-                  <a href="">[Read more]</a>
-                  {% endif %}
+                  <p class="my-0 py-4 py-lg-0">
+                    {% if gig.content|length <= 500 %}
+                      {{ gig.content|linebreaksbr }}
+                    {% else %}
+                      {{ gig.content|linebreaksbr|slice:":500" }}...<br/>
+                    <a href="{% url 'website:shows_detail' gig.pk %}">[Read more]</a>
+                    {% endif %}
+                  </p>
                 </div>
               </div>
             </div>
           {% endfor %}
+          <div class="text-center">
+            <a href="{% url 'website:shows_list' %}" class="small-link">(Show all shows)</a>
+          </div>
         </div>
       </div>
     </div>
@@ -415,48 +379,6 @@
           </div>
         </div>
       </div>
-        <div class="social d-flex justify-content-center">
-          <a href="https://www.instagram.com/officialkaifeck/" target="_blank" title="Instagram" class="mx-2">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.facebook.com/officialKaifeck/" target="_blank" title="Facebook" class="mx-2">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://kaifeck.bandcamp.com" target="_blank" title="Bandcamp" class="mx-2">
-            <i class="fab fa-bandcamp"></i>
-          </a>
-          <a href="https://soundcloud.com/officialkaifeck" target="_blank" title="Soundcloud" class="mx-2">
-            <i class="fab fa-soundcloud"></i>
-          </a>
-          <a href="https://github.com/strassan/www.kaifeck.de" target="_blank" title="Github" class="mx-2">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://keck.kaifeck.de" target="_blank" title="Kaifkeck" class="mx-2">
-            <img src="{% static 'website/img/lukas.svg' %}" alt="koller" width="50%">
-          </a>
-        </div>
-
-
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="bg-black small text-center text-white-50">
-    <div class="container">
-      Copyright &copy; Kaifeck 2020
-    </div>
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="{% static 'jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="{% static '/jquery-easing/jquery.easing.min.js' %}"></script>
-
-  <!-- Custom scripts -->
-  <script src="{% static 'website/js/kaifeck.js' %}"></script>
-
-</body>
-
-</html>
+{% endblock %}

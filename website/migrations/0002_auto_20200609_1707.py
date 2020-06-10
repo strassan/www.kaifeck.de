@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name='News',
             fields=[
                 ('post_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='website.Post')),
-                ('short_description', models.CharField(max_length=128)),
+                ('short_description', models.CharField(blank=True, max_length=128)),
             ],
             options={
                 'verbose_name': 'News',

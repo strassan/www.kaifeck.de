@@ -1,0 +1,48 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+  <section id="gigs" class="detail-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <a href="{% url 'website:shows_list' %}" class="btn btn-primary" role="button">< Show all</a>
+          <h1 class="mb-5 text-center text-white">{{ gig.title }}</h1>
+          <h4 class="text-center text-white-50">
+            {{ gig.gig_start_date }}
+            {% if gig.gig_start_time %}{{ gig.gig_start_time }}{% endif %}
+            {% if gig.gig_end_date and gig.gig_end_time %}
+             - {{ gig.gig_end_date }} {{ gig.gig_end_time }}
+            {% elif gig.gig_end_date %}
+             - {{ gig.gig_end_date }}
+            {% elif gig.gig_end_time %}
+             - {{ gig.gig_end_time }}
+            {% endif %}
+          </h4>
+          <h4 class="mb-5 text-center text-white-50">
+            in
+            {% if gig.google_maps_link %}<a href="{{ gig.google_maps_link }}" title="View on Google Maps" target="_blank">{% endif %}
+              {{ gig.location }}
+            {% if gig.google_maps_link %}</a>{% endif %}
+          </h4>
+          <div class="row no-gutters mb-4 bg-dgray col-lg-8 mx-auto">
+            <div class="my-auto py-0 px-5">
+              <div class="featured-text-l text-white">
+                <p class="my-0 py-4">
+                    {{ gig.content|linebreaksbr }}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% if gig.ticket_link %}
+            <div class="text-center">
+            <a href="{{ gig.ticket_link }}" class="btn btn-primary mt-4" role="button" target="_blank">
+              Get Tickets
+            </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

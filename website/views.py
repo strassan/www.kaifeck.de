@@ -11,14 +11,49 @@ from .models import YouTubeVideo, News, Gig
 
 def index(request):
     videos = YouTubeVideo.objects.filter(show_on_website=True).order_by('-upload_datetime')
-    gigs = [gig for gig in Gig.objects.all() if gig.is_open]
-    news = [n for n in News.objects.all() if n.is_open]
+    gigs = [gig for gig in Gig.objects.all().order_by('-gig_start_date') if gig.is_open]
+    news = [n for n in News.objects.all().order_by('-created_at') if n.is_open]
     context = {
         'videos': videos,
         'news': news,
         'gigs': gigs
     }
     return render(request, "website/index.html", context)
+
+
+def news_list(request):
+    news = News.objects.all().order_by('-created_at')
+    context = {
+        'news': news
+    }
+    return render(request, "website/news_list.html", context)
+
+
+def news_detail(request, pk):
+    n = News.objects.get(pk=pk)
+    context = {
+        'n': n
+    }
+    return render(request, "website/news_detail.html", context)
+
+
+def shows_list(request):
+    gigs = Gig.objects.order_by('-gig_start_date')
+    upcoming_gigs = [gig for gig in gigs if gig.is_open]
+    past_gigs = [gig for gig in gigs if gig.is_closed]
+    context = {
+        'gigs': upcoming_gigs + past_gigs,
+        'num_upcoming': len(upcoming_gigs)
+    }
+    return render(request, "website/shows_list.html", context)
+
+
+def shows_detail(request, pk):
+    gig = Gig.objects.get(pk=pk)
+    context = {
+        'gig': gig
+    }
+    return render(request, "website/shows_detail.html", context)
 
 
 def mail(request):

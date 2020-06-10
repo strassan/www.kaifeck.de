@@ -1,10 +1,7 @@
 from django.contrib import admin
-from django.urls import path
-
-from website.views import index, mail
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('send_mail', mail, name='send_mail')
+    path('', include('website.urls', namespace='website'))
 ]

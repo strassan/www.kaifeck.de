@@ -38,7 +38,7 @@ class Gig(Post):
 
 
 class News(Post):
-    short_description = models.CharField(max_length=128)
+    short_description = models.CharField(max_length=128, blank=True)
 
     class Meta:
         verbose_name = 'News'
