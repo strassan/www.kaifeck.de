@@ -69,6 +69,15 @@
     errorMsg.addClass("d-none");
     errorMsg.html("");
 
+    // check validity of email
+    const email_address = $.trim($("#emailInput").val());
+    const regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    let is_email_valid = regex.test(email_address);
+    if (!is_email_valid) {
+      errorMsg.removeClass("d-none");
+      errorMsg.append("Please enter a valid email address. ");
+    }
+
     // check if the text is empty
     let is_message_empty = true;
     const message = $.trim($("#messageInput").val());
@@ -78,15 +87,6 @@
     }
     else {
       is_message_empty = false;
-    }
-
-    // check validity of email
-    const email_address = $.trim($("#emailInput").val());
-    const regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    let is_email_valid = regex.test(email_address);
-    if (!is_email_valid) {
-      errorMsg.removeClass("d-none");
-      errorMsg.append("Please enter a valid email address. ");
     }
 
     // get csrf_token
