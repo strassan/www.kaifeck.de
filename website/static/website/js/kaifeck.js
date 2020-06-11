@@ -97,7 +97,7 @@
       waitMsg.removeClass("d-none");
       $.ajax({
         type: "POST",
-        url: "send_mail",
+        url: "send_mail/",
         data: {
           sender_email: email_address,
           sender_message: message,

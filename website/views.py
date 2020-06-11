@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils.html import strip_tags
 
 from smtplib import SMTPException
+from socket import gaierror
 
 from .models import YouTubeVideo, News, Gig
 
@@ -83,12 +84,23 @@ def mail(request):
             )
             context = {'success': True, 'smtp_error': str()}
         except SMTPException as err:
+            # usually sth like "Error 535: Authentication Failed"
+            # fix: set correct EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in settings.py
             context = {
                 'success': False, 'smtp_error': '{errno:d}: {str}'.format(
-                    errno=getattr(err, 'smtp_code', -1),
-                    str=getattr(err, 'smtp_error', 'ignore').decode("utf-8")
+                    errno=err.smtp_code,
+                    str=err.smtp_error.decode("utf-8")
                 )
             }
+        except gaierror as err:
+            # usually sth like "Error 11001: getaddrinfo failed"
+            # fix: set correct EMAIL_HOST in settings.py
+            context = {
+                'success': False, 'smtp_error': '{errno:d}: {str}'.format(
+                    errno=err.errno, str=err.strerror
+                )
+            }
+            print(dir(err))
     else:
         context = {'success': False, 'smtp_error': 'fail'}
     return render(request, 'website/send_mail.html', context)
