@@ -54,7 +54,12 @@
               <div class="my-auto py-0 py-lg-4 px-5 px-lg-0 col-lg-6{% if forloop.counter|divisibleby:2 %} order-lg-first{% endif %}">
                 <div class="featured-text{% if forloop.counter|divisibleby:2 %}-r{% else %}-l{% endif %} text-white">
                   <p class="my-0 py-4 py-lg-0">
+                    {% if gig.content|length <= 500 %}
                       {{ gig.content|linebreaksbr }}
+                    {% else %}
+                      {{ gig.content|linebreaksbr|slice:":500" }}...<br/>
+                    <a href="{% url 'website:shows_detail' gig.pk %}">[Read more]</a>
+                    {% endif %}
                   </p>
                 </div>
               </div>

@@ -45,13 +45,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#listen">Listen</a>
           </li>
-          {% if news%}
+          {% if news or gigs %}
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#news">News</a>
-          </li>
-          {% elif gigs%}
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#shows">News</a>
           </li>
           {% else %}
           <li class="nav-item">

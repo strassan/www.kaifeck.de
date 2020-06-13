@@ -1,13 +1,24 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.template import Library
 from django.conf import settings
 from django.utils.html import strip_tags
+
+from datetime import timedelta
 
 from smtplib import SMTPException
 from socket import gaierror
 
 from .models import YouTubeVideo, News, Gig
+
+
+register = Library()
+
+
+@register.filter
+def substract(value, arg):
+    return value - arg
 
 
 def index(request):
@@ -17,7 +28,8 @@ def index(request):
     context = {
         'videos': videos,
         'news': news,
-        'gigs': gigs
+        'gigs': gigs,
+        'timedelta': timedelta(minutes=5)
     }
     return render(request, "website/index.html", context)
 
