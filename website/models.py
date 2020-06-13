@@ -5,7 +5,7 @@ from django.utils import timezone
 class Post(models.Model):
     title = models.CharField(max_length=128)
     content = models.TextField()
-    close_date = models.DateField(help_text="The last day on which the post is visible on the website")
+    close_date = models.DateField(help_text="The last day on which the post is visible on the homepage")
     created_at = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField(editable=False)
 
