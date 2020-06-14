@@ -1,0 +1,75 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+  <section id="gigs" class="news-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <a href="{% url 'website:index' %}" class="btn btn-primary mb-5 mb-lg-0" role="button">< Home</a>
+          <a href="{% url 'website:news_list' %}" class="btn btn-primary mb-5 mb-lg-0 float-right" role="button">News ></a>
+          <h1 class="mb-5 text-center text-white">All shows</h1>
+          {% if num_upcoming > 0 %}
+          <h3 class="mb-4 text-center text-white-50">Upcoming shows</h3>
+          {% endif %}
+          {% for gig in gigs %}
+            {% if forloop.counter0 == num_upcoming %}
+            <h3 class="mt-5 mb-4 text-center text-white-50">Past shows</h3>
+            {% endif %}
+            <div class="row no-gutters mb-4 bg-dgray">
+              <div class="col-lg-6">
+                <div class="bg-black text-center h-100 project">
+                  <div class="d-flex h-100">
+                    <div class="project-text w-100 text-center text-lg-left my-auto">
+                      <h4 class="text-white">
+                        <a class="white-link" href="{% url 'website:shows_detail' gig.pk %}" title="Show details">
+                          {{ gig.title }}
+                        </a>
+                      </h4>
+                      <p class="mb-0 text-white-50">
+                        {{ gig.gig_start_date }}
+                        {% if gig.gig_start_time %}{{ gig.gig_start_time }}{% endif %}
+                        {% if gig.gig_end_date and gig.gig_end_time %}
+                         - {{ gig.gig_end_date }} {{ gig.gig_end_time }}
+                        {% elif gig.gig_end_date %}
+                         - {{ gig.gig_end_date }}
+                        {% elif gig.gig_end_time %}
+                         - {{ gig.gig_end_time }}
+                        {% endif %} <br/>
+                        in
+                        {% if gig.google_maps_link %}<a href="{{ gig.google_maps_link }}" title="View on Google Maps" target="_blank">{% endif %}
+                          {{ gig.location }}
+                        {% if gig.google_maps_link %}</a>{% endif %}
+                      </p>
+                      <hr class="d-none d-lg-block mb-0 ml-0">
+                      {% if gig.ticket_link %}
+                        <a href="{{ gig.ticket_link }}" class="btn btn-primary mt-4" role="button" target="_blank">
+                          Get Tickets
+                        </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="my-auto py-0 py-lg-4 px-5 px-lg-0 col-lg-6{% if forloop.counter|divisibleby:2 %} order-lg-first{% endif %}">
+                <div class="featured-text{% if forloop.counter|divisibleby:2 %}-r{% else %}-l{% endif %} text-white">
+                  <p class="my-0 py-4 py-lg-0">
+                    {% if gig.content|length <= 500 %}
+                      {{ gig.content|linebreaksbr }}
+                    {% else %}
+                      {{ gig.content|linebreaksbr|slice:":500" }}...<br/>
+                    <a href="{% url 'website:shows_detail' gig.pk %}">[Read more]</a>
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          {% if not gigs %}
+            <p class="text-white-50 text-center">No shows planned.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

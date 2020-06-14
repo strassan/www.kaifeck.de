@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Official website of the band Kaifeck">
+  <meta name="keywords" content=
+          "Kaifeck, Band, Official, Offiziell, Rebirth, Music, Musik, Metal, Modern Metal, Metalcore, Progressive,
+          Pfaffenhofen, München, Munich">
+  <meta name="author" content="Andreas Strasser">
+
+  <title>Kaifeck</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}" sizes="any">
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static '/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'website/css/kaifeck.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top" class="bg-black">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="{% url 'website:index' %}#page-top">
+        Kaifeck
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#listen">Listen</a>
+          </li>
+          {% if news or gigs %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#news">News</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'website:news_list' %}">News</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block content %}
+    No content here.
+  {% endblock %}
+
+  {% block footer %}
+  <!-- Footer -->
+  <footer class="bg-black small text-center text-white-50 pt-0">
+    <div class="row no-gutters bg-black justify-content-center">
+      <div class="social d-flex">
+        <a href="https://www.instagram.com/officialkaifeck/" target="_blank" title="Instagram" class="mx-2">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/officialKaifeck/" target="_blank" title="Facebook" class="mx-2">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://kaifeck.bandcamp.com" target="_blank" title="Bandcamp" class="mx-2">
+          <i class="fab fa-bandcamp"></i>
+        </a>
+        <a href="https://soundcloud.com/officialkaifeck" target="_blank" title="Soundcloud" class="mx-2">
+          <i class="fab fa-soundcloud"></i>
+        </a>
+        <a href="https://github.com/strassan/www.kaifeck.de" target="_blank" title="Github" class="mx-2">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://keck.kaifeck.de" target="_blank" title="Kaifkeck" class="mx-2">
+          <img src="{% static 'website/img/lukas.svg' %}" alt="koller" width="50%">
+        </a>
+      </div>
+    </div>
+    <div class="container mt-4">
+      Copyright &copy; Kaifeck 2020
+    </div>
+  </footer>
+  {% endblock %}
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static '/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom scripts -->
+  <script src="{% static 'website/js/kaifeck.js' %}"></script>
+
+</body>
+
+</html>
