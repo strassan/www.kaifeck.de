@@ -2,6 +2,17 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 
 from liliput.models import ShortLink
+from liliput.forms import ShortLinkForm
+
+
+def index(request):
+    form = ShortLinkForm(data=request.POST if request.POST else None)
+    context = {
+        'form': form
+    }
+    if request.POST and form.is_valid():
+        form.save()
+    return render(request, "liliput/index.html", context)
 
 
 def open_short_link(request, short_url):
