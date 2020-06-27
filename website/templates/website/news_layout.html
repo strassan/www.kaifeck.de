@@ -1,0 +1,41 @@
+<div class="row no-gutters mb-4 bg-dgray">
+  <div class="col-lg-6">
+    <div class="bg-black text-center h-100 project">
+      <div class="d-flex h-100">
+        <div class="project-text w-100 text-center text-lg-left my-auto">
+          <h4 class="text-white">
+            <a class="white-link" href="{% url 'website:news_detail' n.pk %}" title="Show details">
+              {{ n.title }}
+            </a>
+          </h4>
+          {% if n.short_description %}
+          <p class="mb-2 mb-lg-0 text-white-50">
+            {{ n.short_description }}
+          </p>
+          {% endif %}
+          <hr class="d-none d-lg-block mb-3 ml-0">
+          <p class="mb-0 text-light small">
+            posted {{ n.created_at|date:"F d, Y" }}
+          </p>
+          {% if n.modified_at != n.created_at %}
+          <p class="mb-0 text-white-50 small">
+            modified {{ n.modified_at|date:"F d, Y" }}
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-auto py-0 py-lg-4 px-5 px-lg-0 col-lg-6{% if forloop.counter|divisibleby:2 %} order-lg-first{% endif %}">
+    <div class="featured-text{% if forloop.counter|divisibleby:2 %}-r{% else %}-l{% endif %} text-white">
+      <p class="my-0 py-4 py-lg-0">
+        {% if n.content|length <= 500 %}
+          {{ n.content|linebreaksbr }}
+        {% else %}
+          {{ n.content|linebreaksbr|slice:":500" }}...<br/>
+        <a href="{% url 'website:news_detail' n.pk %}">[Read more]</a>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+</div>
