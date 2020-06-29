@@ -1,3 +1,26 @@
-/*form label {*/
-/*    color: white;*/
-/*}*/
+form input {
+    width: 100%;
+}
+
+.successMsg a {
+    color: #fff;
+}
+
+.successMsg a:focus, .successMsg a:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+.bottom a {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.bottom a:focus, .bottom a:hover {
+  text-decoration: none;
+  color: #fff;
+}

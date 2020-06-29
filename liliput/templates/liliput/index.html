@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_filters %}
 
 {% block stylesheets %}
   <link href="{% static 'liliput/css/liliput.css' %}" rel="stylesheet">
@@ -16,13 +15,58 @@
   <!-- Header -->
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
-      <div class="row mx-auto text-center">
-        <form class="text-white" action="{% url 'liliput:index'%}" method="post">
-          {% csrf_token %}
-          {{ form|crispy }}
-          <button type="submit" class="btn btn-primary mt-4">Submit</button>
-        </form>
+      <div class="row text-center text-lg-right w-100 mx-auto">
+        {% if message %}
+        <div class="mx-auto mb-5">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        {% endif %}
+        <h3 class="text-center text-white-50 mb-5 col-12">Create a shortened URL</h3>
+        <div class="col-12">
+          <form class="text-white" action="{% url 'liliput:index'%}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="row mb-4">
+              <label class="{{ field.label_class }}" for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              <div class="col-lg-4"></div>
+            </div>
+            {% endfor %}
+            <div class="row">
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}
+                <p class="col-12 text-center errorMsg">{{ error }}</p>
+              {% endfor %}
+            {% endfor %}
+            {% if new_short_url %}
+              <p class="col-12 text-center successMsg">
+                New URL
+                <a href="{{ new_short_url }}">
+                  kaifeck.de/l/{{ new_short_url }}
+                </a>
+                was created. Try it now!
+              </p>
+            {% endif %}
+              <p class="col-12 text-center errorMsg">{{ error }}</p>
+            </div>
+            <div class="row text-center">
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
+    </div>
+    <div class="bottom w-100">
+      <p class="text-white-50 text-center">
+        Short url already taken? Contact <a href="mailto:liliput@kaifeck.de">liliput@kaifeck.de</a>
+      </p>
     </div>
   </header>
 {% endblock %}

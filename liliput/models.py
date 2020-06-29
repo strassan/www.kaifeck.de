@@ -21,6 +21,12 @@ class ShortLink(models.Model):
     def get_short_url(self):
         return 'kaifeck.de/l/' + str(self.short_url)
 
+    def get_redirect_url(self):
+        if self.redirect_url[0:7] == 'http://' or self.redirect_url[0:8] == 'https://':
+            return self.redirect_url
+        else:
+            return 'http://' + self.redirect_url
+
     @property
     def is_closed(self):
         if self.close_date is not None:
