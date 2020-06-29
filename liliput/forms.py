@@ -9,7 +9,7 @@ class ShortLinkForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'col-8 col-lg-4 mx-auto form-control'
             visible.label_class = 'col-12 col-lg-4 my-auto'
-        self.fields['short_url'].widget.attrs['placeholder'] = 'short url'
+        self.fields['short_url'].widget.attrs['placeholder'] = 'short URL'
         self.fields['redirect_url'].widget.attrs['placeholder'] = 'http://example.com'
 
     class Meta:

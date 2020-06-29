@@ -3,6 +3,7 @@ form input {
 }
 
 .successMsg a {
+    text-decoration: underline;
     color: #fff;
 }
 

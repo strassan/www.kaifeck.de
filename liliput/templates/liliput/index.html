@@ -45,11 +45,7 @@
             {% endfor %}
             {% if new_short_url %}
               <p class="col-12 text-center successMsg">
-                New URL
-                <a href="{{ new_short_url }}">
-                  kaifeck.de/l/{{ new_short_url }}
-                </a>
-                was created. Try it now!
+                New URL <a href="{{ new_short_url }}">kaifeck.de/l/{{ new_short_url }}</a> was created. Try it now!
               </p>
             {% endif %}
               <p class="col-12 text-center errorMsg">{{ error }}</p>

@@ -1,0 +1,12 @@
+Hey there,
+
+someone created a new short link on Kaifeck Liliput:
+
+<a href="{{ short_link }}">{{ short_link }}</a>
+now redirects to
+<a href="{{ redirect_link }}">{{ redirect_link }}</a>
+{% if close_date %}
+It expires on {{ close_date }}.
+{% else %}
+It does not expire.
+{% endif %}
