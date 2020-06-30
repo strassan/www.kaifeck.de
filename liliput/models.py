@@ -6,13 +6,18 @@ class ShortLink(models.Model):
     short_url = models.CharField(max_length=32, unique=True)
     redirect_url = models.CharField(max_length=256)
     close_date = models.DateField(null=True, blank=True)
+    verified = models.BooleanField(default=False)
+    number_of_requests = models.IntegerField(editable=False)
     created_at = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField(editable=False)
 
-    def save(self, *args, **kwargs):
+    def save(self, modify=True, *args, **kwargs):
         if not self.pk:
             self.created_at = timezone.now()
-        self.modified_at = timezone.now()
+            self.number_of_requests = 0
+            self.modified_at = timezone.now()
+        if modify:
+            self.modified_at = timezone.now()
         return super(ShortLink, self).save(*args, **kwargs)
 
     def __str__(self):

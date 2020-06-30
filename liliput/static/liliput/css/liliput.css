@@ -24,3 +24,11 @@ form input {
     text-decoration: none;
     color: #fff;
 }
+
+.alert-danger a {
+    font-weight: bold;
+}
+
+.alert-danger a:focus, .alert-danger a:hover {
+    text-decoration: underline;
+}

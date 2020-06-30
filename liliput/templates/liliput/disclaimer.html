@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block description %}Kaifeck Liliput URL Shortener{% endblock %}
+{% block title %}Kaifeck // Liliput{% endblock %}
+
+{% block stylesheets %}
+  <link href="{% static 'liliput/css/liliput.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+<a class="navbar-brand js-scroll-trigger" href="{% url 'liliput:index' %}">
+        Kaifeck // Liliput URL Shortender
+</a>
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+  Menu
+  <i class="fas fa-bars"></i>
+</button>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}">Homepage</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+      <div class="row w-100 mx-auto">
+        <div class="mx-auto mb-5">
+          <div class="alert alert-danger col-12" role="alert">
+            <h3>Disclaimer</h3>
+            This link was created using the <a href="{% url 'liliput:index' %}">Kaifeck Liliput URL Shortener</a> and has not yet been verified by an admin.<br>
+            It redirects to
+            <a href="{{ redirect_url }}">
+              {% if redirect_url|length <= 40 %}
+                {{ redirect_url }}
+              {% else %}
+                {{ redirect_url|slice:":40" }}...
+              {% endif %}
+            </a>
+            which may be a malicious website.<br>
+            <br>
+            Kaifeck does not take any responsibility for links leading to an external website and does not want to be associated with its content.
+            <hr>
+            Dieser Link wurde mit dem <a href="{% url 'liliput:index' %}">Kaifeck Liliput URL Shortener</a> erstellt und noch nicht von einem Admin überprüft.<br>
+            Er leitet auf
+            <a href="{{ redirect_url }}">
+              {% if redirect_url|length <= 40 %}
+                {{ redirect_url }}
+              {% else %}
+                {{ redirect_url|slice:":40" }}...
+              {% endif %}
+            </a>
+            die schädliche Inhalte enthalten könnte.<br>
+            <br>
+            Kaifeck übernimmt keinerlei Verantwortung für Links, die zu externen Websiten führen und will nicht mit deren Inhalt in Verbindung gebracht werden.
+          </div>
+          <div class="col-12 text-center">
+            <a class="btn btn-success mr-lg-2 mb-2 col-6 col-lg-4" href="{% url 'liliput:index' %}">
+              < Take me back!<br>
+              <small class="text-white-50 d-none d-lg-block">Ich will zurück!</small>
+            </a>
+            <a class="btn btn-danger ml-lg-2 mb-2 col-6 col-lg-4" href="{{ redirect_url }}">
+              I know what I'm doing ><br>
+              <small class="text-white-50 d-none d-lg-block">Ich weiß was ich tue</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom w-100">
+      <p class="text-white-50 text-center px-4">
+        You created this link and want it to be verified? Contact <a href="mailto:liliput@kaifeck.de">liliput@kaifeck.de</a>
+      </p>
+    </div>
+  </header>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

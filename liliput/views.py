@@ -42,8 +42,17 @@ def index(request, context=None):
 def open_short_link(request, short_url):
     qs = ShortLink.objects.filter(short_url=short_url)
     if qs.exists():
-        if qs.first().is_open:
-            return redirect(qs.first().get_redirect_url())
+        short_link = qs.first()
+        short_link.number_of_requests += 1
+        short_link.save(modify=False)
+        if short_link.is_open:
+            if short_link.verified:
+                return redirect(short_link.get_redirect_url())
+            else:
+                context = {
+                    'redirect_url': short_link.get_redirect_url()
+                }
+                return render(request, "liliput/disclaimer.html", context)
         else:
             return index(request, context={'message': 'This short link expired.'})
     else:
