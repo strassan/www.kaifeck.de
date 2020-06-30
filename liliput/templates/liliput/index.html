@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block description %}Kaifeck Liliput URL Shortener{% endblock %}
+{% block title %}Kaifeck // Liliput{% endblock %}
+
 {% block stylesheets %}
   <link href="{% static 'liliput/css/liliput.css' %}" rel="stylesheet">
 {% endblock %}
@@ -9,6 +12,17 @@
 <a class="navbar-brand js-scroll-trigger" href="{% url 'liliput:index' %}">
         Kaifeck // Liliput URL Shortender
 </a>
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+  Menu
+  <i class="fas fa-bars"></i>
+</button>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}">Homepage</a>
+    </li>
+  </ul>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -61,7 +75,7 @@
     </div>
     <div class="bottom w-100">
       <p class="text-white-50 text-center">
-        Short url already taken? Contact <a href="mailto:liliput@kaifeck.de">liliput@kaifeck.de</a>
+        Questions? Contact <a href="mailto:liliput@kaifeck.de">liliput@kaifeck.de</a>
       </p>
     </div>
   </header>

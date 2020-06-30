@@ -6,13 +6,13 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Official website of the band Kaifeck">
+  <meta name="description" content="{% block description %}Official website of the band Kaifeck{% endblock %}">
   <meta name="keywords" content=
           "Kaifeck, Band, Official, Offiziell, Rebirth, Music, Musik, Metal, Modern Metal, Metalcore, Progressive,
-          Pfaffenhofen, München, Munich">
+          Pfaffenhofen, München, Munich, {% block keywords %}{% endblock %}">
   <meta name="author" content="Andreas Strasser">
 
-  <title>Kaifeck</title>
+  <title>{% block title %}Kaifeck{% endblock %}</title>
   <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}" sizes="any">
 
   <!-- Bootstrap core CSS -->

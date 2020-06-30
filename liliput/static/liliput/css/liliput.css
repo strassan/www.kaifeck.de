@@ -3,13 +3,12 @@ form input {
 }
 
 .successMsg a {
-    text-decoration: underline;
-    color: #fff;
+    font-weight: bold;
+    color: #00cc00;
 }
 
 .successMsg a:focus, .successMsg a:hover {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.5);
+    text-decoration: underline;
 }
 
 .bottom {
@@ -22,6 +21,6 @@ form input {
 }
 
 .bottom a:focus, .bottom a:hover {
-  text-decoration: none;
-  color: #fff;
+    text-decoration: none;
+    color: #fff;
 }
