@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
+
+from kaifeck.settings import ALLOWED_HOSTS
 
 
 class ShortLink(models.Model):
@@ -24,7 +27,10 @@ class ShortLink(models.Model):
         return self.short_url
 
     def get_short_url(self):
-        return 'kaifeck.de/l/' + str(self.short_url)
+        if len(ALLOWED_HOSTS) > 0:
+            return ALLOWED_HOSTS[0] + reverse('liliput:index') + str(self.short_url)
+        else:
+            return reverse('liliput:index') + str(self.short_url)
 
     def get_redirect_url(self):
         if self.redirect_url[0:7] == 'http://' or self.redirect_url[0:8] == 'https://':
