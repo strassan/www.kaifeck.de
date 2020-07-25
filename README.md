@@ -138,9 +138,6 @@ WSGIPythonPath /var/www/www.example.com/
         Include /etc/letsencrypt/options-ssl-apache.conf
         SSLCertificateFile /etc/letsencrypt/live/www.example.com/fullchain.pem
         SSLCertificateKeyFile /etc/letsencrypt/live/www.example.com/privkey.pem
-        ServerAlias kaifeck.de
-        SSLCertificateFile /etc/letsencrypt/live/www.example.com/fullchain.pem
-        SSLCertificateKeyFile /etc/letsencrypt/live/www.example.com/privkey.pem
 </VirtualHost>
 </IfModule>
 ```
