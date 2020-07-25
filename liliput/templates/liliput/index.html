@@ -59,7 +59,9 @@
             {% endfor %}
             {% if new_short_url %}
               <p class="col-12 text-center successMsg">
-                New URL <a href="{{ new_short_url }}">{{ request.get_host }}{% url 'liliput:index' %}{{ new_short_url }}</a> was created. Try it now!
+                New URL <a id="short_url" href="{{ new_short_url }}">{{ request.get_host }}{% url 'liliput:index' %}{{ new_short_url }}</a> was created. Try it now!<br>
+                Copy to clipboard: <a id="btn-copy" class="btn btn-success py-2 px-3 text-white" title="Copy to clipboard">&#x2398;</a>
+                <span id="msg-copy" class="text-white-50 d-none">Copied!</span>
               </p>
             {% endif %}
               <p class="col-12 text-center errorMsg">{{ error }}</p>
@@ -82,4 +84,8 @@
 {% endblock %}
 
 {% block footer %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'liliput/js/liliput.js' %}"></script>
 {% endblock %}

@@ -2,11 +2,14 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
+import string
+import random
+
 from kaifeck.settings import ALLOWED_HOSTS
 
 
 class ShortLink(models.Model):
-    short_url = models.CharField(max_length=32, unique=True)
+    short_url = models.CharField(max_length=32, null=True, blank=True, unique=True)
     redirect_url = models.CharField(max_length=256)
     close_date = models.DateField(null=True, blank=True)
     verified = models.BooleanField(default=False)
@@ -19,6 +22,15 @@ class ShortLink(models.Model):
             self.created_at = timezone.now()
             self.number_of_requests = 0
             self.modified_at = timezone.now()
+        if not self.short_url:
+            chars = string.digits + string.ascii_letters
+            random_url = ''
+            loop = True
+            while loop:
+                random_url = ''.join(random.choice(chars) for i in range(6))
+                qs = ShortLink.objects.filter(short_url=random_url)
+                loop = qs.exists()
+            self.short_url = random_url
         if modify:
             self.modified_at = timezone.now()
         return super(ShortLink, self).save(*args, **kwargs)
