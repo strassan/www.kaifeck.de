@@ -23,7 +23,7 @@ class ShortLink(models.Model):
             self.number_of_requests = 0
             self.modified_at = timezone.now()
         if not self.short_url:
-            chars = string.digits + string.ascii_letters
+            chars = string.digits + string.ascii_letters + "$-_+!*"
             random_url = ''
             loop = True
             while loop:
