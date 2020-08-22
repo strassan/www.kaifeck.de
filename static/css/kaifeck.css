@@ -359,17 +359,28 @@
   color: #0c0;
 }
 
+.w-50 {
+  width: 50%;
+}
+
 .leftCol {
-    border-right: 1px solid white !important;
-    text-align: right;
-    padding-right: 20px !important;
-    width: 50%;
+  border-right: 1px solid white !important;
+  text-align: right;
+  padding-right: 20px !important;
+}
+
+.midCol {
+  border-left: 1px solid white !important;
+  border-right: 1px solid white !important;
+  text-align: center;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
 }
 
 .rightCol {
-    text-align: left;
-    padding-left: 20px !important;
-    width: 50%;
+  border-left: 1px solid white !important;
+  text-align: left;
+  padding-left: 20px !important;
 }
 
 body {
