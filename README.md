@@ -107,6 +107,10 @@ WSGIPythonPath /var/www/www.example.com/
         Require all granted
 </Directory>
 
+<Directory /var/www/www.example.com/media/>
+        Require all granted
+</Directory>
+
 <VirtualHost *:80>
         ServerAdmin admin@example.com
         DocumentRoot /var/www/www.example.com/
@@ -115,6 +119,7 @@ WSGIPythonPath /var/www/www.example.com/
         CustomLog logs/www.example.com-access_log common
 
         Alias "/static/" "/var/www/www.example.com/assets/"
+        Alias "/media/" "/var/www/www.example.com/media/"
 
         WSGIScriptAlias / /var/www/www.example.com/kaifeck/wsgi.py
 
@@ -132,6 +137,7 @@ WSGIPythonPath /var/www/www.example.com/
         CustomLog logs/www.example.com-access_log common
 
         Alias "/static/" "/var/www/www.example.com/assets/"
+        Alias "/media/" "/var/www/www.example.com/media/"
 
         WSGIScriptAlias / /var/www/www.example.com/kaifeck/wsgi.py
 
