@@ -1,5 +1,7 @@
 from django.urls import path, re_path
+from django.conf.urls.static import static
 
+from kaifeck import settings
 from website import views
 
 app_name = 'website'
@@ -12,3 +14,5 @@ urlpatterns = [
     path('shows/<int:pk>/', views.shows_detail, name='shows_detail'),
     path('send_mail/', views.mail, name='send_mail')
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

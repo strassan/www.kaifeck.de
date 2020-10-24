@@ -30,6 +30,11 @@
             modified {{ n.modified_at|date:"F d, Y" }}
           </p>
           {% endif %}
+          {% if n.image %}
+          <div class="row no-gutters mt-4 col-lg-8 mx-auto px-0">
+            <img src="{% url 'website:index'%}{{ MEDIA_URL }}{{ n.image.name }}" class="img-fluid" width="100%">
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>

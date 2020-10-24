@@ -22,6 +22,9 @@
             modified {{ n.modified_at|date:"F d, Y" }}
           </p>
           {% endif %}
+          {% if n.image %}
+          <p class="mt-2 small"><a href="{% url 'website:news_detail' n.pk %}">Click to show image</a></p>
+          {% endif %}
         </div>
       </div>
     </div>
