@@ -42,8 +42,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'kaifeck.urls'
 
-MEDIA_ROOT = 'media/'
-MEDIA_URL = MEDIA_ROOT
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
 
 TEMPLATES = [
     {
