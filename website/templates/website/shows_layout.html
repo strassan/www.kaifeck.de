@@ -19,13 +19,13 @@
              - {{ gig.gig_end_time }}
             {% endif %} <br/>
             in
-            {% if gig.google_maps_link %}<a href="{{ gig.google_maps_link }}" title="View on Google Maps" target="_blank">{% endif %}
+            {% if gig.google_maps_link %}<a href="{{ gig.google_maps_link }}" title="View on Google Maps" target="_blank" onclick="event.stopPropagation();">{% endif %}
               {{ gig.location }}
             {% if gig.google_maps_link %}</a>{% endif %}
           </p>
           <hr class="d-none d-lg-block mb-0 ml-0">
           {% if gig.ticket_link %}
-            <a href="{{ gig.ticket_link }}" class="btn btn-primary mt-4" role="button" target="_blank" title="Get tickets">
+            <a href="{{ gig.ticket_link }}" class="btn btn-primary mt-4" role="button" target="_blank" title="Get tickets" onclick="event.stopPropagation();">
               Get Tickets
             </a>
           {% endif %}
