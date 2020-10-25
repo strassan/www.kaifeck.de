@@ -1,6 +1,6 @@
 <div class="row no-gutters mb-4 bg-dgray">
-  <div class="col-lg-6">
-    <div class="bg-black text-center h-100 project">
+  <div class="col-lg-6" style="cursor: pointer;" onclick="window.location='{% url 'website:news_detail' n.pk %}';" title="Show details">
+    <div class="bg-hover text-center h-100 project">
       <div class="d-flex h-100">
         <div class="project-text w-100 text-center text-lg-left my-auto">
           <h4 class="text-white">
@@ -21,9 +21,6 @@
           <p class="mb-0 text-white-50 small">
             modified {{ n.modified_at|date:"F d, Y" }}
           </p>
-          {% endif %}
-          {% if n.image %}
-          <p class="mt-2 small"><a href="{% url 'website:news_detail' n.pk %}">Click to show image</a></p>
           {% endif %}
         </div>
       </div>

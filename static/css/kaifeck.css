@@ -296,6 +296,14 @@
   background: #282828
 }
 
+.bg-hover:hover {
+  background: #000000
+}
+
+.bg-hover {
+  background: #161616
+}
+
 .contact-section {
   padding: 5rem 0 0;
 }

@@ -1,6 +1,6 @@
 <div class="row no-gutters mb-4 bg-dgray">
-  <div class="col-lg-6">
-    <div class="bg-black text-center h-100 project">
+  <div class="col-lg-6" style="cursor: pointer;" onclick="window.location='{% url 'website:shows_detail' gig.pk %}';" title="Show details">
+    <div class="bg-hover text-center h-100 project">
       <div class="d-flex h-100">
         <div class="project-text w-100 text-center text-lg-left my-auto">
           <h4 class="text-white">
@@ -25,7 +25,7 @@
           </p>
           <hr class="d-none d-lg-block mb-0 ml-0">
           {% if gig.ticket_link %}
-            <a href="{{ gig.ticket_link }}" class="btn btn-primary mt-4" role="button" target="_blank">
+            <a href="{{ gig.ticket_link }}" class="btn btn-primary mt-4" role="button" target="_blank" title="Get tickets">
               Get Tickets
             </a>
           {% endif %}
