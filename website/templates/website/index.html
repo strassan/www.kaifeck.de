@@ -14,13 +14,22 @@
     <li class="nav-item">
       <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#listen">Listen</a>
     </li>
-    {% if news or gigs %}
+    {% if news %}
     <li class="nav-item">
       <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#news">News</a>
     </li>
     {% else %}
     <li class="nav-item">
       <a class="nav-link js-scroll-trigger" href="{% url 'website:news_list' %}">News</a>
+    </li>
+    {% endif %}
+    {% if gigs %}
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}#shows">Shows</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="{% url 'website:shows_list' %}">Shows</a>
     </li>
     {% endif %}
     <li class="nav-item">
@@ -133,9 +142,11 @@
     </div>
   </section>
 
-  {% if news or gigs %}
+  {% if news %}
   <!-- News section -->
   <section id="news" class="news-section">
+  {% elif gigs %}
+  <section id="shows" class="news-section">
   {% endif %}
   {% if news %}
     <div class="container">
@@ -163,7 +174,7 @@
       <div class="row">
         <div class="col-lg-12 mx-auto">
           <h1 class="mb-5 text-center text-white">
-            <a href="{% url 'website:shows_list' %}" class="white-link" title="Show all shows">
+            <a {% if news %}id="shows"{% endif %} href="{% url 'website:shows_list' %}" class="white-link" title="Show all shows">
               Upcoming shows
             </a>
           </h1>
