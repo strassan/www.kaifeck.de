@@ -30,10 +30,17 @@
   // Collapse Navbar
   let navbarCollapse = function() {
     let mainNav = $("#mainNav");
+    let logo = document.getElementById('logo');
     if (mainNav.offset().top > 100) {
       mainNav.addClass("navbar-shrink");
+      logo.src = "/static/website/img/logo/logo_black.svg";
+      logo.style = "opacity: 1;";
     } else {
       mainNav.removeClass("navbar-shrink");
+      if (window.matchMedia("(min-width: 992px)").matches) {
+        logo.src = "/static/website/img/logo/logo_white.svg";
+        logo.style = "opacity: 0.6;";
+      }
     }
   };
   // Collapse now if page is not at top

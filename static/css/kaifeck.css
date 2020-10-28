@@ -18,7 +18,7 @@
 
 #mainNav .navbar-toggler {
   font-size: 80%;
-  padding: 0.75rem;
+  padding: 0.75em;
   color: var(--main-color);
   border: 1px solid var(--main-color);
 }
@@ -59,7 +59,7 @@
   }
   #mainNav .nav-link {
     transition: none;
-    padding: 2rem 1.5rem;
+    padding: 1rem 1.5rem;
     color: rgba(255, 255, 255, 0.5);
   }
   #mainNav .nav-link:hover {
