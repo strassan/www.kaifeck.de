@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from datetime import timedelta
+
 
 class Post(models.Model):
     title = models.CharField(max_length=128)
@@ -26,6 +28,13 @@ class Post(models.Model):
     @property
     def is_open(self):
         return not self.is_closed
+
+    @property
+    def has_been_modified(self):
+        if self.modified_at - self.created_at > timedelta(minutes=10):
+            return True
+        else:
+            return False
 
 
 class Gig(Post):
