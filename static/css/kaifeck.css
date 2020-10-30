@@ -31,8 +31,12 @@
 #mainNav .navbar-brand {
   color: #161616;
   font-weight: 700;
-  padding: .9rem 0;
+  padding: 0;
 }
+
+#mainNav .navbar-nav {
+    padding-top: 0.5rem;
+  }
 
 #mainNav .navbar-nav .nav-item:hover {
   color: white;
@@ -57,6 +61,11 @@
     padding: .5rem 0;
     color: rgba(255, 255, 255, 0.5);
   }
+
+  #mainNav .navbar-nav {
+    padding-top: 0;
+  }
+
   #mainNav .nav-link {
     transition: none;
     padding: 1rem 1.5rem;
