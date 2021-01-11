@@ -288,12 +288,20 @@
   color: #727272;
 }
 
-.news-section .white-link {
+.white-link {
   color: #ffffff;
 }
 
-.news-section .white-link:hover {
+.white-link:hover {
   color: #a5a5a5;
+}
+
+.white-50-link {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.white-50-link:hover {
+  color: rgba(165, 165, 165, 0.5);
 }
 
 .detail-section {

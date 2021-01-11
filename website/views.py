@@ -116,3 +116,10 @@ def mail(request):
     else:
         context = {'success': False, 'smtp_error': 'fail'}
     return render(request, 'website/send_mail.html', context)
+
+
+def legal_notice(request):
+    context = {
+        'legal_notice': settings.LEGAL_NOTICE
+    }
+    return render(request, 'website/legal_notice.html', context)

@@ -132,3 +132,12 @@ EMAIL_SENDER = 'noreply@kaifeck.de'
 
 # Youtube API
 YOUTUBE_API_KEY = '****'
+
+# Legal notice
+LEGAL_NOTICE = {
+    'name': 'Name Surname',
+    'street': 'Example street 69',
+    'city': '12345 City name',
+    'country': 'Germany',
+    'email': 'spam@spam.spam',
+}
