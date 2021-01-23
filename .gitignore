@@ -5,3 +5,5 @@ media/
 *.pyc
 *.sqlite3
 
+# contains secret settings
+kaifeck/local_settings.py
