@@ -1,5 +1,23 @@
-# Secret key
+import os
+from .settings import BASE_DIR
+
+
 SECRET_KEY = 'sg8xoww6brqiw1*du#m3tc)iieo%%i9xhp&@1ppbu_b)*@ds=8'
+
+DEBUG=False
+
+ALLOWED_HOSTS = ['www.kaifeck.de', 'kaifeck.de']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'django-usr',
+        'NAME': 'kaifeck_website',
+        'PASSWORD': '****',
+    }
+}
 
 # Mail
 EMAIL_USE_SSL = True
@@ -20,3 +38,12 @@ LEGAL_NOTICE = {
     'country': 'Germany',
     'email': 'spam@example.com',
 }
+
+# HTTPS
+SECURE_HSTS_SECONDS = 1
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_PRELOAD = True
+SECURE_REFERRER_POLICY = 'same-origin'

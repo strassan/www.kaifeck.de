@@ -123,6 +123,25 @@ STATICFILES_DIRS = [
 # Mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+EMAIL_USE_SSL = True
+EMAIL_HOST = '****'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '****'
+EMAIL_HOST_PASSWORD = '****'
+EMAIL_SENDER = 'noreply@example.com'
+
+# Youtube API
+YOUTUBE_API_KEY = '****'
+
+# Legal notice
+LEGAL_NOTICE = {
+    'name': 'Name Surname',
+    'street': 'Example street 69',
+    'city': '12345 City name',
+    'country': 'Germany',
+    'email': 'spam@spam.spam',
+}
+
 # local_settings containing stuff to keep secret
 try:
     from .local_settings import *
