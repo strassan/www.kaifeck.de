@@ -27,21 +27,22 @@ To work with emails and YouTube API see corresponding bullet points in [Adjust S
 There's several things to do when deploying this project.
 
 ## Adjust Settings
-In [settings.py](../master/kaifeck/settings.py):
+Get a secret key and remember it:
+```
+$ python3
+>>> from django.core.management.utils import get_random_secret_key
+>>> get_random_secret_key()
+'<secret_key>'
+>>> exit()
+```
+Create kaifeck/local_settings.py and add the following lines (overrides variables of [settings.py](../master/kaifeck/settings.py)):
+  * Add the new secret key
+    ```
+    SECRET_KEY = '<secret_key>'
+    ```
   * Disable debug mode
     ```
     DEBUG = False
-    ```
-  * Create a new secret key
-    ```
-    $ python3
-    >>> from django.core.management.utils import get_random_secret_key
-    >>> get_random_secret_key()
-    '<secret_key>'
-    >>> exit()
-    ```
-    ```
-    SECRET_KEY = '<secret_key>'
     ```
   * Set allowed hosts
     ```
@@ -50,6 +51,11 @@ In [settings.py](../master/kaifeck/settings.py):
   * Change to another database format (e.g. mysql). Make sure the user has all privileges on the database.
     You will need to install the mysqlclient python package.
     ```
+    import os 
+    from .settings import BASE_DIR
+    
+    (...)
+    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -87,6 +93,7 @@ In [settings.py](../master/kaifeck/settings.py):
     ```
     TIME_ZONE = '<time_zone>'
     ```
+You can also use the [local_settings.py.example](../master/kaifeck/local_settings.py.example) file for reference.
   
 ### Check configuration
 ```
