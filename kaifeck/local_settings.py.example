@@ -8,6 +8,8 @@ DEBUG=False
 
 ALLOWED_HOSTS = ['www.kaifeck.de', 'kaifeck.de']
 
+ADMIN_URL = 'admin/'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -26,6 +28,15 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = '****'
 EMAIL_HOST_PASSWORD = '****'
 EMAIL_SENDER = 'noreply@example.com'
+
+# Mailcow OAUTH2
+MAILCOW_USER_GROUP = 'Mailcow'
+
+MAILCOW_OAUTH_AUTHORIZATION_URL = 'https://mailcow.example.com/oauth/authorize'
+MAILCOW_OAUTH_ACCESS_TOKEN_URL = 'https://mailcow.example.com/oauth/token'
+MAILCOW_OAUTH_PROFILE_URL = 'https://mailcow.example.com/oauth/profile'
+MAILCOW_OAUTH_CLIENT_ID = '****'
+MAILCOW_OAUTH_CLIENT_SECRET = '****'
 
 # Youtube API
 YOUTUBE_API_KEY = '****'

@@ -9,8 +9,6 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError as GoogleHttpError
 import json
 
-from .models import YouTubeVideo, Gig, News
-
 
 def make_visible_on_website(modeladmin, request, queryset):
     queryset.update(show_on_website=True)
@@ -20,7 +18,7 @@ def make_invisible_on_website(modeladmin, request, queryset):
     queryset.update(show_on_website=False)
 
 
-@admin.register(YouTubeVideo)
+# for YouTubeVideos
 class YouTubeAdmin(admin.ModelAdmin):
     list_display = ['title', 'show_on_website']
     ordering = ['-show_on_website', '-upload_datetime']
@@ -87,6 +85,6 @@ class YouTubeAdmin(admin.ModelAdmin):
         return HttpResponseRedirect('../')
 
 
-@admin.register(Gig, News)
+# for Gigs and News
 class PostAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'modified_at',)

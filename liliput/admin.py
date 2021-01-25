@@ -1,5 +1,4 @@
 from django.contrib import admin
-from liliput.models import ShortLink
 
 
 def verify_selected_short_links(modeladmin, request, queryset):
@@ -10,7 +9,7 @@ def unverify_selected_short_links(modeladmin, request, queryset):
     queryset.update(verified=False)
 
 
-@admin.register(ShortLink)
+# for ShortLinks
 class ShortLinkAdmin(admin.ModelAdmin):
     list_display = ['short_url', 'verified', 'close_date']
     ordering = ['-verified', '-modified_at']

@@ -89,6 +89,20 @@ Create kaifeck/local_settings.py and add the following lines (overrides variable
     SECURE_HSTS_PRELOAD = True
     SECURE_REFERRER_POLICY = 'same-origin'
     ```
+  * *(optional)* Set up OAUTH2 via Mailcow
+    ```
+    MAILCOW_USER_GROUP = 'Mailcow'
+
+    MAILCOW_OAUTH_AUTHORIZATION_URL = 'https://mailcow.example.com/oauth/authorize'
+    MAILCOW_OAUTH_ACCESS_TOKEN_URL = 'https://mailcow.example.com/oauth/token'
+    MAILCOW_OAUTH_PROFILE_URL = 'https://mailcow.example.com/oauth/profile'
+    MAILCOW_OAUTH_CLIENT_ID = '<client_id>'
+    MAILCOW_OAUTH_CLIENT_SECRET = '<client_secret>'
+    ```
+  * *(optional)* Change the URL of the django admin page
+    ```
+    ADMIN_URL = 'myadmin/'
+    ```
   * *(optional)* Change timezone
     ```
     TIME_ZONE = '<time_zone>'
