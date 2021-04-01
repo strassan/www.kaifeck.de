@@ -43,7 +43,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'kaifeck.urls'
 
-ADMIN_URL = 'kecks/'
+ADMIN_URL = 'admin/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
