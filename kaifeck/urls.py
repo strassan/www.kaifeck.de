@@ -6,5 +6,6 @@ urlpatterns = [
     path(ADMIN_URL, site.urls),
     path('', include('social_django.urls', namespace='social')),
     path('', include('website.urls', namespace='website')),
-    path('l/', include('liliput.urls', namespace='liliput'))
+    path('l/', include('liliput.urls', namespace='liliput')),
+    path('links/', include('linkpage.urls', namespace='linkpage')),
 ]

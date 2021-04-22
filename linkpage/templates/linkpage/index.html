@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block description %}Kaifeck Linkpage{% endblock %}
+{% block title %}Kaifeck // Linkpage{% endblock %}
+
+{#{% block stylesheets %}#}
+{#  <link href="{% static 'liliput/css/liliput.css' %}" rel="stylesheet">#}
+{#{% endblock %}#}
+
+{% block content %}
+  <header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+      <div class="mx-auto text-center col-12 col-lg-10">
+        <h1 class="text-white-50 text-center mb-4 mx-auto" style="font-size: xx-large;">Links</h1>
+        <div class="card shadow bg-dgray p-5 ">
+        {% for l in links %}
+          {% include 'linkpage/link_layout.html' %}
+        {% endfor %}
+        {% if not links %}
+          <p class="text-white-50 text-center my-auto">No links available.</p>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+{#  <section id="links" class="links-section">#}
+{#    <div class="container">#}
+{#      {% for l in links %}#}
+{#        {% include 'linkpage/link_layout.html' %}#}
+{#      {% endfor %}#}
+{#      {% if not links %}#}
+{#        <p class="text-white-50 text-center">No links available.</p>#}
+{#      {% endif %}#}
+{#    </div>#}
+{#  </section>#}
+{% endblock %}
+
+{#{% block footer %}#}
+{#{% endblock %}#}
+
+{#{% block scripts %}#}
+{#<script src="{% static 'liliput/js/liliput.js' %}"></script>#}
+{#{% endblock %}#}

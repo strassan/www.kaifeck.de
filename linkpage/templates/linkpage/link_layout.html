@@ -1,0 +1,17 @@
+<div class="row justify-content-center no-gutters mb-4">
+  <a class="col-lg-12 card bg-lgray shadow" href="{{ l.url }}">
+    <div class="text-center">
+      <div class="row align-items-center">
+        <div class="col-3 d-sm-none"></div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-3 mx-sm-0 mt-sm-0 ">
+          <img src="{% url 'website:index'%}{{ MEDIA_URL }}{{ l.image.name }}" class="img-fluid pl-sm-3 pl-md-0" width="100%">
+        </div>
+        <div class="col-3 d-sm-none"></div>
+        <div class="col-sm-8 col-md-9 col-lg-10 text-left my-auto">
+          <h2 class="p-3 pt-sm-3 p-sm-0 my-auto font-weight-bold" style="font-size: large;">{{ l.title }}</h2>
+          <p class="my-auto pt-0 pt-sm-2 pb-3 px-3 px-sm-0 pr-sm-3">{{ l.description }}</p>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'social_django',
 
     'website',
-    'liliput'
+    'liliput',
+    'linkpage',
 ]
 
 MIDDLEWARE = [
