@@ -10,8 +10,12 @@ class Link(models.Model):
         help_text="For best result, always upload images with 1:1 aspect ratio",
         upload_to='links'
     )
+    open_date = models.DateField(
+        help_text="The first day on which the link will be visible on the linkpage",
+        null=True, blank=True
+    )
     close_date = models.DateField(
-        help_text="The last day on which the link is visible on the linkpage",
+        help_text="The last day on which the link will be visible on the linkpage",
         null=True, blank=True
     )
     created_at = models.DateTimeField(editable=False)
@@ -27,12 +31,16 @@ class Link(models.Model):
         return self.title
 
     @property
-    def is_closed(self):
-        if self.close_date is None:
-            return False
-        else:
-            return timezone.now().date() > self.close_date
+    def is_open(self):
+        if self.close_date is None and self.open_date is None:
+            return True  # it is always open
+        elif self.close_date is None and self.open_date is not None:
+            return timezone.now().date() >= self.open_date  # it is only open once the open date was reached
+        elif self.close_date is not None and self.open_date is None:
+            return timezone.now().date() <= self.close_date  # it is only open until the close date was reached
+        else:  # both close and open date exist
+            return self.open_date <= timezone.now().date() <= self.close_date  # it is open from open until close date
 
     @property
-    def is_open(self):
-        return not self.is_closed
+    def is_closed(self):
+        return not self.is_open
