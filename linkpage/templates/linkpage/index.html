@@ -4,10 +4,6 @@
 {% block description %}Kaifeck Linkpage{% endblock %}
 {% block title %}Kaifeck // Linkpage{% endblock %}
 
-{#{% block stylesheets %}#}
-{#  <link href="{% static 'liliput/css/liliput.css' %}" rel="stylesheet">#}
-{#{% endblock %}#}
-
 {% block content %}
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
@@ -24,22 +20,26 @@
       </div>
     </div>
   </header>
-
-{#  <section id="links" class="links-section">#}
-{#    <div class="container">#}
-{#      {% for l in links %}#}
-{#        {% include 'linkpage/link_layout.html' %}#}
-{#      {% endfor %}#}
-{#      {% if not links %}#}
-{#        <p class="text-white-50 text-center">No links available.</p>#}
-{#      {% endif %}#}
-{#    </div>#}
-{#  </section>#}
 {% endblock %}
 
-{#{% block footer %}#}
-{#{% endblock %}#}
+{% block scripts %}
+  <script>
+    $("a").click(function(e)
+      {
+        let elem = $(this);
+        let location = elem[0].getAttribute("data-href-alt");
+        let timer = setTimeout(function() {
+          if (location != null) {
+            window.location = location;
+          }
+        }, 200);
 
-{#{% block scripts %}#}
-{#<script src="{% static 'liliput/js/liliput.js' %}"></script>#}
-{#{% endblock %}#}
+        window.location = elem[0].getAttribute("href");
+        window.onblur = function () {
+            clearTimeout(timer)
+        }
+
+        e.preventDefault();
+      });
+  </script>
+{% endblock %}

@@ -6,6 +6,12 @@ class Link(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(null=True, blank=True)
     url = models.CharField(max_length=256)
+    alt_url = models.CharField(
+        max_length=256,
+        verbose_name="Alternative Url",
+        help_text="Provide an alternative url, if original url does not use http or https protocol",
+        null=True, blank=True
+    )
     image = models.ImageField(
         help_text="For best result, always upload images with 1:1 aspect ratio",
         upload_to='links'

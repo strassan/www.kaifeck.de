@@ -1,5 +1,5 @@
 <div class="row justify-content-center no-gutters mb-4">
-  <a class="col-lg-12 card bg-lgray shadow" href="{{ l.url }}">
+  <a class="col-lg-12 card bg-lgray shadow" href="{{ l.url }}"{% if l.alt_url %} data-href-alt="{{ l.alt_url }}"{% endif %}>
     <div class="text-center">
       <div class="row align-items-center">
         <div class="col-3 d-sm-none"></div>
