@@ -25,7 +25,7 @@
           <p class="mb-0 text-center text-light small">
             posted {{ n.created_at|date:"F d, Y" }}
           </p>
-          {% if n.modified_at != n.created_at %}
+          {% if n.has_been_modified %}
           <p class="mb-0 text-center text-white-50 small">
             modified {{ n.modified_at|date:"F d, Y" }}
           </p>
