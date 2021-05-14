@@ -5,11 +5,15 @@
 {% block title %}Kaifeck // Linkpage{% endblock %}
 
 {% block content %}
+{#  <script src="{% static 'jquery/jquery.min.js' %}"></script>#}
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center col-12 col-lg-10">
         <h1 class="text-white-50 text-center mb-4 mx-auto" style="font-size: xx-large;">Links</h1>
         <div class="card shadow bg-dgray p-5 ">
+        {% for lf in link_folders %}
+          {% include 'linkpage/linkfolder_layout.html' %}
+        {% endfor %}
         {% for l in links %}
           {% include 'linkpage/link_layout.html' %}
         {% endfor %}
@@ -23,23 +27,41 @@
 {% endblock %}
 
 {% block scripts %}
+  <!-- for making alt_url work -->
   <script>
     $("a").click(function(e)
       {
         let elem = $(this);
-        let location = elem[0].getAttribute("data-href-alt");
-        let timer = setTimeout(function() {
-          if (location != null) {
-            window.location = location;
+        if (elem[0].getAttribute("href")[0] !== "#") {
+          let location = elem[0].getAttribute("data-href-alt");
+          let timer = setTimeout(function () {
+              if (location != null) {
+                  window.location = location;
+              }
+          }, 200);
+
+          window.location = elem[0].getAttribute("href");
+          window.onblur = function () {
+              clearTimeout(timer)
           }
-        }, 200);
 
-        window.location = elem[0].getAttribute("href");
-        window.onblur = function () {
-            clearTimeout(timer)
+          e.preventDefault();
         }
-
-        e.preventDefault();
       });
   </script>
+
+  <!-- for changing arrow direction on collapse -->
+  <script>
+  {% for lf in link_folders %}
+    let collapse_links_{{ lf.pk }} = $('#collapse-child-links-{{ lf.pk }}');
+    // Change "Show more" button text on collapse
+    collapse_links_{{ lf.pk }}.on('show.bs.collapse', function () {
+      $('#expand-arrow-{{ lf.pk }}').attr('src', '{% static 'img/arrow-up.png' %}');
+    });
+    // Change "Show less" button text on hide
+    collapse_links_{{ lf.pk }}.on('hide.bs.collapse', function () {
+      $('#expand-arrow-{{ lf.pk }}').attr('src', '{% static 'img/arrow-down.png' %}');
+    });
+  {% endfor %}
+</script>
 {% endblock %}

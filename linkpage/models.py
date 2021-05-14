@@ -2,16 +2,9 @@ from django.db import models
 from django.utils import timezone
 
 
-class Link(models.Model):
+class LinkFolder(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(null=True, blank=True)
-    url = models.CharField(max_length=256)
-    alt_url = models.CharField(
-        max_length=256,
-        verbose_name="Alternative Url",
-        help_text="Provide an alternative url, if original url does not use http or https protocol",
-        null=True, blank=True
-    )
     image = models.ImageField(
         help_text="For best result, always upload images with 1:1 aspect ratio",
         upload_to='links'
@@ -31,7 +24,7 @@ class Link(models.Model):
         if not self.pk:
             self.created_at = timezone.now()
         self.modified_at = timezone.now()
-        return super(Link, self).save(*args, **kwargs)
+        return super(LinkFolder, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -50,3 +43,14 @@ class Link(models.Model):
     @property
     def is_closed(self):
         return not self.is_open
+
+
+class Link(LinkFolder):
+    url = models.CharField(max_length=256)
+    alt_url = models.CharField(
+        max_length=256,
+        verbose_name="Alternative Url",
+        help_text="Provide an alternative url, if original url does not use http or https protocol",
+        null=True, blank=True
+    )
+    parent_folder = models.ForeignKey(LinkFolder, models.CASCADE, null=True, blank=True, related_name='+')

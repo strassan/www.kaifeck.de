@@ -4,8 +4,8 @@ from website.models import YouTubeVideo, Gig, News
 from website.admin import YouTubeAdmin, PostAdmin
 from liliput.models import ShortLink
 from liliput.admin import ShortLinkAdmin
-from linkpage.models import Link
-from linkpage.admin import LinkAdmin
+from linkpage.models import LinkFolder, Link
+from linkpage.admin import LinkFolderAdmin, LinkAdmin
 
 
 class MyAdminSite(AdminSite):
@@ -25,4 +25,5 @@ site.register(YouTubeVideo, YouTubeAdmin)
 site.register(Gig, PostAdmin)
 site.register(News, PostAdmin)
 site.register(ShortLink, ShortLinkAdmin)
+site.register(LinkFolder, LinkFolderAdmin)
 site.register(Link, LinkAdmin)
