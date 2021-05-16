@@ -67,7 +67,7 @@
         {% for video in videos %}
           {% if forloop.counter == 1 %}
             <!-- Song 1 (featured) -->
-            <div class="bg-lgray row align-items-center no-gutters mb-5 mb-lg-5">
+            <div class="bg-lgray row align-items-center no-gutters my-5 mb-lg-5">
               <div class="embed-responsive embed-responsive-16by9 col-xl-8 col-lg-7">
                 <iframe class="embed-responsive-item mb-3 mb-lg-0"
                         src="{{ video.get_embed_link }}" allowfullscreen></iframe>
