@@ -6,6 +6,8 @@ from liliput.models import ShortLink
 from liliput.admin import ShortLinkAdmin
 from linkpage.models import LinkFolder, Link
 from linkpage.admin import LinkFolderAdmin, LinkAdmin
+from timed_links.models import TimedLink
+from timed_links.admin import TimedLinkAdmin
 
 
 class MyAdminSite(AdminSite):
@@ -27,3 +29,4 @@ site.register(News, PostAdmin)
 site.register(ShortLink, ShortLinkAdmin)
 site.register(LinkFolder, LinkFolderAdmin)
 site.register(Link, LinkAdmin)
+site.register(TimedLink, TimedLinkAdmin)

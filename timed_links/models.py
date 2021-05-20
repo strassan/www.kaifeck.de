@@ -1,11 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from django.urls import reverse
-
-import string
-import random
-
-from kaifeck.settings import ALLOWED_HOSTS
 
 
 class TimedLink(models.Model):
@@ -19,42 +13,28 @@ class TimedLink(models.Model):
     message_when_too_early = models.TextField(
         help_text="The message to be shown, when the link has been opened before the open time was reached."
     )
+    message_on_homepage = models.TextField(
+        help_text="The message to be shown on the homepage while the link is open."
+    )
     message_when_too_late = models.TextField(
         help_text="The message to be shown, when the link has been opened after the close time was reached."
     )
 
-    # TODO: add missing fields
+    button_text = models.CharField(max_length=128, help_text="The text on the button")
 
     number_of_requests = models.IntegerField(editable=False)
     created_at = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField(editable=False)
 
-    def save(self, modify=True, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.pk:
             self.created_at = timezone.now()
             self.number_of_requests = 0
-            self.modified_at = timezone.now()
-        if not self.short_url:
-            chars = string.digits + string.ascii_letters + "$-_+!*"
-            random_url = ''
-            loop = True
-            while loop:
-                random_url = ''.join(random.choice(chars) for i in range(6))
-                qs = ShortLink.objects.filter(short_url=random_url)
-                loop = qs.exists()
-            self.short_url = random_url
-        if modify:
-            self.modified_at = timezone.now()
+        self.modified_at = timezone.now()
         return super(TimedLink, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.short_url
-
-    def get_short_url(self):
-        if len(ALLOWED_HOSTS) > 0:
-            return ALLOWED_HOSTS[0] + reverse('liliput:index') + str(self.short_url)
-        else:
-            return reverse('liliput:index') + str(self.short_url)
+        return self.path
 
     def get_redirect_url(self):
         if self.redirect_url[0:7] == 'http://' or self.redirect_url[0:8] == 'https://':
@@ -63,12 +43,17 @@ class TimedLink(models.Model):
             return 'http://' + self.redirect_url
 
     @property
-    def is_closed(self):
-        if self.close_date is not None:
-            return timezone.now().date() > self.close_date
-        else:
-            False
+    def is_open(self):
+        return self.open_time < timezone.now() < self.close_time
 
     @property
-    def is_open(self):
-        return not self.is_closed
+    def is_closed(self):
+        return not self.is_open
+
+    @property
+    def is_too_early(self):
+        return timezone.now() < self.open_time
+
+    @property
+    def is_too_late(self):
+        return self.close_time < timezone.now()

@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+
+# for TimedLinks
+class TimedLinkAdmin(admin.ModelAdmin):
+    list_display = ['path', 'redirect_url', 'open_time', 'close_time']
+    ordering = ['-modified_at']
+    readonly_fields = ('created_at', 'modified_at', 'number_of_requests',)

@@ -11,6 +11,7 @@ from smtplib import SMTPException
 from socket import gaierror
 
 from .models import YouTubeVideo, News, Gig
+from timed_links.models import TimedLink
 
 
 register = Library()
@@ -25,12 +26,24 @@ def index(request):
     videos = YouTubeVideo.objects.filter(show_on_website=True).order_by('-upload_datetime')
     gigs = [gig for gig in Gig.objects.all().order_by('-gig_start_date') if gig.is_open]
     news = [n for n in News.objects.all().order_by('-created_at') if n.is_open]
+
     context = {
         'videos': videos,
         'news': news,
         'gigs': gigs,
-        'timedelta': timedelta(minutes=5)
     }
+
+    open_timed_link = [tl for tl in TimedLink.objects.all() if tl.is_open]
+    # make sure this is only one timed link
+    if len(open_timed_link) > 0:
+        open_timed_link = open_timed_link[0]
+    else:
+        open_timed_link = None
+
+    context['open_timed_link'] = open_timed_link
+    if open_timed_link is not None:
+        context['open_time_link_redirect'] = open_timed_link.get_redirect_url()
+
     return render(request, "website/index.html", context)
 
 
