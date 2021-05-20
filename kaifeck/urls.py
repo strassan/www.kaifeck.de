@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include('website.urls', namespace='website')),
     path('l/', include('liliput.urls', namespace='liliput')),
     path('links/', include('linkpage.urls', namespace='linkpage')),
+    path('', include('timed_links.urls', namespace='timed_links')),  # must always be the last path in the list
 ]

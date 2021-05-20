@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'website',
     'liliput',
     'linkpage',
+    'timed_links',
 ]
 
 MIDDLEWARE = [
