@@ -321,6 +321,10 @@
   background: #282828
 }
 
+.bg-dgray-80 {
+  background: rgba(40, 40, 40, 0.8);
+}
+
 .bg-hover:hover {
   background: #000000
 }

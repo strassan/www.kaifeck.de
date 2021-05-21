@@ -50,7 +50,7 @@
         <img class="img-fluid mb-3" src="{% static 'website/img/logo/logo_white.svg' %}" width="50%" alt="logo">
         <!--h1 class="mx-auto my-0 text-uppercase">Kaifeck</h1-->
         {% if open_timed_link %}
-          <h2 class="text-white mx-auto mt-2 mb-5">{{ open_timed_link.message_on_homepage }}</h2>
+          <h2 class="text-white mx-auto mt-2 mb-5">{{ open_timed_link.message_on_homepage|safe }}</h2>
         {% else %}
           <h2 class="text-white mx-auto mt-2 mb-5">Welcome to the official website of the band Kaifeck.</h2>
         {% endif %}

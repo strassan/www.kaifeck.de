@@ -26,11 +26,13 @@ class TimedLink(models.Model):
     created_at = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField(editable=False)
 
-    def save(self, *args, **kwargs):
+    def save(self, modify=True, *args, **kwargs):
         if not self.pk:
             self.created_at = timezone.now()
             self.number_of_requests = 0
-        self.modified_at = timezone.now()
+            self.modified_at = timezone.now()
+        if modify:
+            self.modified_at = timezone.now()
         return super(TimedLink, self).save(*args, **kwargs)
 
     def __str__(self):

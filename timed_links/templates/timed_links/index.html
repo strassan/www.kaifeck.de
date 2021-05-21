@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link href="{% static 'liliput/css/liliput.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+<a class="navbar-brand js-scroll-trigger" href="{% url 'liliput:index' %}">
+        Kaifeck
+</a>
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+  Menu
+  <i class="fas fa-bars"></i>
+</button>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="{% url 'website:index' %}">Homepage</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+      <div class="row w-100 mx-auto">
+        <div class="mx-auto mb-5 col-12 col-lg-8 text-center">
+          <div class="card-body bg-dgray text-white text-left mb-5">
+            {% if is_too_early %}
+              {{ timed_link.message_when_too_early|safe }}
+            {% else %}
+              {{ timed_link.message_when_too_late|safe }}
+            {% endif %}
+          </div>
+          <a href="{{ timed_link_redirect }}" class="btn btn-primary">
+            {{ timed_link.button_text }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
