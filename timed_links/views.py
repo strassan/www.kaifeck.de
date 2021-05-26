@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
 
 from .models import TimedLink
 
@@ -20,4 +19,4 @@ def open_link(request, path):
             }
             return render(request, "timed_links/index.html", context)
     else:
-        raise Http404("Timed Link does not exist.")
+        return redirect(path + '/')
