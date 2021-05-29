@@ -40,7 +40,7 @@
           {{ gig.content|safe|linebreaksbr }}
         {% else %}
           {{ gig.content|safe|linebreaksbr|slice:":500" }}...<br/>
-        <a href="{% url 'website:shows_detail' gig.pk %}">[Read more]</a>
+        <a href="{% url 'website:shows_detail' gig.pk %}" class="white-50-link">[Read more]</a>
         {% endif %}
       </p>
     </div>

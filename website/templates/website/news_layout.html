@@ -33,7 +33,7 @@
           {{ n.content|safe|linebreaksbr }}
         {% else %}
           {{ n.content|safe|linebreaksbr|slice:":500" }}...<br/>
-        <a href="{% url 'website:news_detail' n.pk %}">[Read more]</a>
+        <a href="{% url 'website:news_detail' n.pk %}" class="white-50-link">[Read more]</a>
         {% endif %}
       </p>
     </div>
