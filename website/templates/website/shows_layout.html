@@ -37,9 +37,9 @@
     <div class="featured-text{% if forloop.counter|divisibleby:2 %}-r{% else %}-l{% endif %} text-white">
       <p class="my-0 py-4 py-lg-0">
         {% if gig.content|length <= 500 %}
-          {{ gig.content|linebreaksbr }}
+          {{ gig.content|safe|linebreaksbr }}
         {% else %}
-          {{ gig.content|linebreaksbr|slice:":500" }}...<br/>
+          {{ gig.content|safe|linebreaksbr|slice:":500" }}...<br/>
         <a href="{% url 'website:shows_detail' gig.pk %}">[Read more]</a>
         {% endif %}
       </p>
